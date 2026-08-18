@@ -8,32 +8,26 @@
     duel: '<rect x="4" y="14" width="26" height="26" rx="3" fill="none" stroke="#CFA34E" stroke-width="3"></rect><rect x="26" y="16" width="26" height="26" rx="3" fill="none" stroke="#A86E2E" stroke-width="3"></rect>',
   };
 
-  let menuContent = window.MenuStore.getContent();
-
   const sessionNameEl = document.getElementById('sessionName');
   const sessionNameInput = document.getElementById('sessionNameInput');
   const nextDynamicInput = document.getElementById('nextDynamicInput');
 
-  function renderMenuContent() {
-    sessionNameEl.textContent = menuContent.sessionName;
-    sessionNameInput.value = menuContent.sessionName;
-    nextDynamicInput.value = menuContent.nextDynamic;
-  }
-  renderMenuContent();
-
-  function commitField(key, value) {
-    menuContent = { ...menuContent, [key]: value.trim() || menuContent[key] };
-    window.MenuStore.saveContent(menuContent);
-    renderMenuContent();
+  function commitSessionName() {
+    const menuContent = window.MenuStore.getContent();
+    const value = sessionNameInput.value.trim() || menuContent.sessionName;
+    window.MenuStore.saveContent({ ...menuContent, sessionName: value });
+    sessionNameEl.textContent = value;
+    sessionNameInput.value = value;
   }
 
-  sessionNameInput.addEventListener('blur', () => commitField('sessionName', sessionNameInput.value));
-  nextDynamicInput.addEventListener('blur', () => commitField('nextDynamic', nextDynamicInput.value));
-  [sessionNameInput, nextDynamicInput].forEach((input) => {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') input.blur();
-    });
+  sessionNameEl.textContent = window.MenuStore.getContent().sessionName;
+  sessionNameInput.value = window.MenuStore.getContent().sessionName;
+  sessionNameInput.addEventListener('blur', commitSessionName);
+  sessionNameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') sessionNameInput.blur();
   });
+
+  window.NextDynamicField.mount(nextDynamicInput);
 
   const dueloCount = window.DueloStore.getContent().challenges.length;
 
@@ -48,7 +42,10 @@
       <div class="mono menu-op__card-count">${d.implemented ? `${count} preguntas cargadas` : 'Próximamente'}</div>
     `;
     if (d.implemented) {
-      card.addEventListener('click', () => window.AppView.show(d.view));
+      card.addEventListener('click', () => {
+        window.OperatorNavStore.setView(d.view);
+        window.ViewSections.activate(d.view);
+      });
     } else {
       card.disabled = true;
     }

@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/menu-operador.css">
+<link rel="stylesheet" href="css/header-controls.css">
 <link rel="stylesheet" href="css/operador.css">
 </head>
 <body>
@@ -50,9 +51,12 @@
 
 <section class="view duelo-op" id="view-duelo" hidden>
   <div class="duelo-op__header">
-    <button class="btn-ghost duelo-op__back" id="backToMenuBtn">← Menú</button>
-    <div class="mono duelo-op__eyebrow">DUELO EN CURSO</div>
-    <div class="duelo-op__title">Control de resultado</div>
+    <div class="duelo-op__header-left">
+      <button class="btn-ghost duelo-op__back" id="backToMenuBtn">← Menú</button>
+      <div class="mono duelo-op__eyebrow">DUELO EN CURSO</div>
+      <div class="duelo-op__title">Control de resultado</div>
+    </div>
+    <div class="header-controls" id="headerControls-duelo"></div>
   </div>
 
   <div class="duelo-op__players">
@@ -99,13 +103,23 @@
 <script src="data/menu-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
 <script src="js/menu-store.js"></script>
-<script src="js/app-store.js"></script>
-<script src="js/app-view.js"></script>
+<script src="js/operator-nav-store.js"></script>
+<script src="js/public-view-store.js"></script>
+<script src="js/view-sections.js"></script>
+<script src="js/next-dynamic-field.js"></script>
+<script src="js/header-controls.js"></script>
 <script src="js/menu-operador.js"></script>
 <script src="js/operador-duelo.js"></script>
 <script>
-  document.getElementById('backToMenuBtn').addEventListener('click', () => window.AppView.show('menu'));
-  window.AppView.init(false);
+  function goToMenu() {
+    window.OperatorNavStore.setView('menu');
+    window.ViewSections.activate('menu');
+  }
+  document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
+
+  window.HeaderControls.mount(document.getElementById('headerControls-duelo'), 'duelo');
+
+  window.ViewSections.activate(window.OperatorNavStore.getView());
 </script>
 </body>
 </html>

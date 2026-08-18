@@ -53,12 +53,16 @@
 <script src="data/menu-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
 <script src="js/menu-store.js"></script>
-<script src="js/app-store.js"></script>
-<script src="js/app-view.js"></script>
+<script src="js/public-view-store.js"></script>
+<script src="js/view-sections.js"></script>
 <script src="js/menu-publico.js"></script>
 <script src="js/publico-duelo.js"></script>
 <script>
-  window.AppView.init(true);
+  window.PublicViewStore.onChange(window.ViewSections.activate);
+  window.ViewSections.activate(window.PublicViewStore.getView());
+  window.EventoChannel.on('public:view', (payload) => {
+    window.PublicViewStore.setView(payload.view, { broadcast: false });
+  });
 </script>
 </body>
 </html>
