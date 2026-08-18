@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/menu-publico.css">
 <link rel="stylesheet" href="css/publico.css">
+<link rel="stylesheet" href="css/timed-challenge-public.css">
 <link rel="stylesheet" href="css/publico-algo.css">
+<link rel="stylesheet" href="css/publico-codigo.css">
 </head>
 <body>
 
@@ -49,36 +51,59 @@
   <div class="duelo-pub__confetti" id="confettiLayer"></div>
 </section>
 
-<section class="view algo-pub" id="view-algoritmo" hidden>
-  <div class="algo-pub__top">
-    <div class="algo-pub__title">¿Qué algoritmo es este?</div>
-    <div class="algo-pub__timer">
-      <svg width="150" height="150" viewBox="0 0 150 150" class="algo-pub__timer-svg">
+<section class="view tcp-page" id="view-algoritmo" hidden>
+  <div class="tcp-top">
+    <div class="tcp-title">¿Qué algoritmo es este?</div>
+    <div class="tcp-timer">
+      <svg width="150" height="150" viewBox="0 0 150 150" class="tcp-timer-svg">
         <circle cx="75" cy="75" r="64" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"></circle>
-        <circle cx="75" cy="75" r="64" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" class="algo-pub__timer-ring" id="algoTimerRing"></circle>
+        <circle cx="75" cy="75" r="64" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" class="tcp-timer-ring" id="algoTimerRing"></circle>
       </svg>
-      <div class="mono algo-pub__timer-label" id="algoTimerLabel"></div>
+      <div class="mono tcp-timer-label" id="algoTimerLabel"></div>
     </div>
   </div>
 
   <div class="mono algo-pub__lang" id="algoPubLang"></div>
-  <div class="algo-pub__code" id="algoPubCode"></div>
+  <div class="tcp-code" id="algoPubCode"></div>
 
   <div class="algo-pub__answer" id="algoPubAnswer" hidden></div>
+</section>
+
+<section class="view tcp-page" id="view-codigo" hidden>
+  <div class="tcp-top">
+    <div class="tcp-title">¿Qué imprime este código?</div>
+    <div class="tcp-timer">
+      <svg width="150" height="150" viewBox="0 0 150 150" class="tcp-timer-svg">
+        <circle cx="75" cy="75" r="64" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"></circle>
+        <circle cx="75" cy="75" r="64" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" class="tcp-timer-ring" id="codigoTimerRing"></circle>
+      </svg>
+      <div class="mono tcp-timer-label" id="codigoTimerLabel"></div>
+    </div>
+  </div>
+
+  <div class="tcp-code" id="codigoPubCode"></div>
+
+  <div class="codigo-pub__answer" id="codigoPubAnswer" hidden>
+    <div class="mono codigo-pub__answer-label">RESPUESTA</div>
+    <div class="mono codigo-pub__answer-value" id="codigoPubAnswerValue"></div>
+  </div>
 </section>
 
 <script src="js/broadcast.js"></script>
 <script src="data/duelo-defaults.js"></script>
 <script src="data/menu-defaults.js"></script>
 <script src="data/algo-defaults.js"></script>
+<script src="data/codigo-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
 <script src="js/algo-store.js"></script>
+<script src="js/codigo-store.js"></script>
 <script src="js/menu-store.js"></script>
 <script src="js/public-view-store.js"></script>
 <script src="js/view-sections.js"></script>
 <script src="js/menu-publico.js"></script>
 <script src="js/publico-duelo.js"></script>
 <script src="js/publico-algo.js"></script>
+<script src="js/publico-codigo.js"></script>
 <script>
   window.PublicViewStore.onChange(window.ViewSections.activate);
   window.ViewSections.activate(window.PublicViewStore.getView());

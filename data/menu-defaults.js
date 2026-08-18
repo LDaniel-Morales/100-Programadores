@@ -5,7 +5,7 @@ window.MENU_DEFAULTS = {
   waitingText: 'preparen sus teclados',
   dynamics: [
     { id: 'trivia', name: 'Trivia Popular', icon: 'circle', count: 84, implemented: false },
-    { id: 'codigo', name: '¿Qué dice el código?', icon: 'code', count: 52, implemented: false },
+    { id: 'codigo', name: '¿Qué dice el código?', icon: 'code', count: null, implemented: true, view: 'codigo' },
     { id: 'algoritmo', name: 'Adivina el Algoritmo', icon: 'diamond', count: null, implemented: true, view: 'algoritmo' },
     { id: 'duelo', name: 'Duelo de Programación', icon: 'duel', count: null, implemented: true, view: 'duelo' },
   ],

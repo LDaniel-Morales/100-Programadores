@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="css/menu-operador.css">
 <link rel="stylesheet" href="css/header-controls.css">
 <link rel="stylesheet" href="css/dynamic-shared.css">
+<link rel="stylesheet" href="css/timed-challenge.css">
+<link rel="stylesheet" href="css/public-preview.css">
 <link rel="stylesheet" href="css/operador.css">
 <link rel="stylesheet" href="css/operador-algo.css">
 </head>
@@ -110,9 +112,9 @@
     <div class="header-controls" id="headerControls-algoritmo"></div>
   </div>
 
-  <div class="algo-op__body">
-    <div class="algo-op__main">
-      <div class="dyn-section-head algo-op__nav-head">
+  <div class="tc-body">
+    <div>
+      <div class="dyn-section-head tc-nav-head">
         <div class="mono dyn-label">// RETO</div>
         <div class="dyn-actions">
           <button class="btn-ghost" id="prevChallengeBtn">← Reto anterior</button>
@@ -121,16 +123,16 @@
       </div>
 
       <div class="mono dyn-label algo-op__lang" id="algoLang"></div>
-      <div class="algo-op__code" id="algoCode"></div>
+      <div class="tc-code" id="algoCode"></div>
 
-      <div class="algo-op__duration-row">
+      <div class="tc-duration-row">
         <div class="mono dyn-label">DURACIÓN</div>
-        <div class="algo-op__duration-options" id="algoDurationOptions"></div>
+        <div class="tc-duration-options" id="algoDurationOptions"></div>
       </div>
 
-      <div class="algo-op__actions-row">
-        <button class="btn-primary algo-op__start" id="startTimerBtn"></button>
-        <button class="algo-op__reveal" id="revealAnswerBtn">Revelar nombre</button>
+      <div class="tc-actions-row">
+        <button class="btn-primary tc-start" id="startTimerBtn"></button>
+        <button class="tc-reveal" id="revealAnswerBtn">Revelar nombre</button>
       </div>
     </div>
 
@@ -141,21 +143,62 @@
   </div>
 </section>
 
+<section class="view dyn-page" id="view-codigo" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="codigoBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow" id="codigoChallengeCounter"></div>
+      <div class="dyn-header__title">¿Qué imprime este código?</div>
+    </div>
+    <div class="header-controls" id="headerControls-codigo"></div>
+  </div>
+
+  <div class="tc-body">
+    <div>
+      <div class="dyn-section-head tc-nav-head">
+        <div class="mono dyn-label">// RETO</div>
+        <div class="dyn-actions">
+          <button class="btn-ghost" id="prevChallengeBtnCodigo">← Reto anterior</button>
+          <button class="btn-ghost" id="nextChallengeBtnCodigo">Reto siguiente →</button>
+        </div>
+      </div>
+
+      <div class="tc-code" id="codigoCode"></div>
+
+      <div class="tc-duration-row">
+        <div class="mono dyn-label">DURACIÓN</div>
+        <div class="tc-duration-options" id="codigoDurationOptions"></div>
+      </div>
+
+      <div class="tc-actions-row">
+        <button class="btn-primary tc-start" id="startTimerBtnCodigo"></button>
+        <button class="tc-reveal" id="revealAnswerBtnCodigo">Revelar respuesta</button>
+      </div>
+    </div>
+
+    <div id="codigoPreview"></div>
+  </div>
+</section>
+
 <script src="js/broadcast.js"></script>
 <script src="data/duelo-defaults.js"></script>
 <script src="data/menu-defaults.js"></script>
 <script src="data/algo-defaults.js"></script>
+<script src="data/codigo-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
 <script src="js/algo-store.js"></script>
+<script src="js/codigo-store.js"></script>
 <script src="js/menu-store.js"></script>
 <script src="js/operator-nav-store.js"></script>
 <script src="js/public-view-store.js"></script>
 <script src="js/view-sections.js"></script>
 <script src="js/next-dynamic-field.js"></script>
 <script src="js/header-controls.js"></script>
+<script src="js/public-preview.js"></script>
 <script src="js/menu-operador.js"></script>
 <script src="js/operador-duelo.js"></script>
 <script src="js/operador-algo.js"></script>
+<script src="js/operador-codigo.js"></script>
 <script>
   function goToMenu() {
     window.OperatorNavStore.setView('menu');
@@ -163,9 +206,11 @@
   }
   document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);
+  document.getElementById('codigoBackToMenuBtn').addEventListener('click', goToMenu);
 
   window.HeaderControls.mount(document.getElementById('headerControls-duelo'), 'duelo');
   window.HeaderControls.mount(document.getElementById('headerControls-algoritmo'), 'algoritmo');
+  window.HeaderControls.mount(document.getElementById('headerControls-codigo'), 'codigo');
 
   window.ViewSections.activate(window.OperatorNavStore.getView());
 </script>

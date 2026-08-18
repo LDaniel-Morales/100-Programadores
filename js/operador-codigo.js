@@ -1,33 +1,32 @@
 (function () {
-  const content = window.AlgoStore.getContent();
-  let state = window.AlgoStore.getState();
+  const content = window.CodigoStore.getContent();
+  let state = window.CodigoStore.getState();
   let intervalId = null;
 
   const el = {
-    counter: document.getElementById('algoChallengeCounter'),
-    lang: document.getElementById('algoLang'),
-    code: document.getElementById('algoCode'),
-    durationOptions: document.getElementById('algoDurationOptions'),
-    startBtn: document.getElementById('startTimerBtn'),
-    revealBtn: document.getElementById('revealAnswerBtn'),
-    answer: document.getElementById('algoAnswer'),
-    prevBtn: document.getElementById('prevChallengeBtn'),
-    nextBtn: document.getElementById('nextChallengeBtnAlgo'),
+    counter: document.getElementById('codigoChallengeCounter'),
+    code: document.getElementById('codigoCode'),
+    durationOptions: document.getElementById('codigoDurationOptions'),
+    startBtn: document.getElementById('startTimerBtnCodigo'),
+    revealBtn: document.getElementById('revealAnswerBtnCodigo'),
+    prevBtn: document.getElementById('prevChallengeBtnCodigo'),
+    nextBtn: document.getElementById('nextChallengeBtnCodigo'),
   };
+
+  window.PublicPreview.mount(document.getElementById('codigoPreview'));
 
   function currentChallenge() {
     return content.challenges[state.challengeIndex];
   }
 
   function save(options) {
-    window.AlgoStore.saveState(state, options);
+    window.CodigoStore.saveState(state, options);
   }
 
   function render() {
     const challenge = currentChallenge();
 
     el.counter.textContent = `RETO ${state.challengeIndex + 1} / ${content.challenges.length}`;
-    el.lang.textContent = challenge.lang;
 
     el.code.innerHTML = '';
     challenge.lines.forEach((tokens) => {
@@ -53,7 +52,6 @@
 
     el.startBtn.textContent = state.running ? `Corriendo… ${state.timeLeft}s` : 'Iniciar timer';
     el.revealBtn.classList.toggle('is-revealed', state.revealed);
-    el.answer.textContent = challenge.answer;
 
     el.prevBtn.disabled = state.challengeIndex === 0;
     el.nextBtn.disabled = state.challengeIndex === content.challenges.length - 1;

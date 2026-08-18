@@ -1,0 +1,63 @@
+/* Piezas compartidas por las dinámicas de "reto con timer" en la vista
+   Público: título + temporizador circular arriba, bloque de código centrado. */
+
+.tcp-page {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #173B6C 0%, #0B2545 45%, #0A0A0A 85%);
+  padding: 56px 64px;
+  box-sizing: border-box;
+}
+
+.tcp-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.tcp-title {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+.tcp-timer {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.tcp-timer-svg {
+  transform: rotate(-90deg);
+}
+
+.tcp-timer-ring {
+  transition: stroke-dashoffset 1s linear, stroke 0.3s;
+}
+
+.tcp-timer-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.tcp-code {
+  background: var(--panel-2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 40px 48px;
+  font-size: 24px;
+  line-height: 1.85;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.tcp-code-line {
+  white-space: pre;
+}

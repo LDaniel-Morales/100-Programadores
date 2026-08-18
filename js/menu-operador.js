@@ -32,6 +32,7 @@
   const contentCounts = {
     duelo: window.DueloStore.getContent().challenges.length,
     algoritmo: window.AlgoStore.getContent().challenges.length,
+    codigo: window.CodigoStore.getContent().challenges.length,
   };
 
   const gridEl = document.getElementById('menuDynamics');

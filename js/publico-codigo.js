@@ -1,20 +1,18 @@
 (function () {
-  const content = window.AlgoStore.getContent();
+  const content = window.CodigoStore.getContent();
 
   const el = {
-    lang: document.getElementById('algoPubLang'),
-    code: document.getElementById('algoPubCode'),
-    ring: document.getElementById('algoTimerRing'),
-    timerLabel: document.getElementById('algoTimerLabel'),
-    answer: document.getElementById('algoPubAnswer'),
+    code: document.getElementById('codigoPubCode'),
+    ring: document.getElementById('codigoTimerRing'),
+    timerLabel: document.getElementById('codigoTimerLabel'),
+    answer: document.getElementById('codigoPubAnswer'),
+    answerValue: document.getElementById('codigoPubAnswerValue'),
   };
 
   const CIRCUMFERENCE = 402;
 
   function render(state) {
     const challenge = content.challenges[state.challengeIndex];
-
-    el.lang.textContent = challenge.lang;
 
     el.code.innerHTML = '';
     challenge.lines.forEach((tokens) => {
@@ -36,9 +34,9 @@
     el.timerLabel.textContent = String(state.timeLeft).padStart(2, '0');
 
     el.answer.hidden = !state.revealed;
-    el.answer.textContent = state.revealed ? challenge.answer : '';
+    el.answerValue.textContent = state.revealed ? challenge.answer : '';
   }
 
-  render(window.AlgoStore.getState());
-  window.EventoChannel.on('algo:state', render);
+  render(window.CodigoStore.getState());
+  window.EventoChannel.on('codigo:state', render);
 })();

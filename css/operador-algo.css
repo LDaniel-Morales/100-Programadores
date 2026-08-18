@@ -1,96 +1,6 @@
-.algo-op__body {
-  padding: 32px 40px;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 32px;
-  align-items: start;
-}
-
-.algo-op__nav-head {
-  margin-bottom: 10px;
-}
-
 .algo-op__lang {
   font-size: 11px;
   margin-bottom: 10px;
-}
-
-.algo-op__code {
-  background: var(--panel-2);
-  border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 24px 28px;
-  font-size: 16px;
-  line-height: 1.8;
-  margin-bottom: 28px;
-  overflow-x: auto;
-}
-
-.algo-op__code-line {
-  white-space: pre;
-}
-
-.algo-op__duration-row {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.algo-op__duration-row .dyn-label {
-  font-size: 12px;
-  letter-spacing: 1.5px;
-}
-
-.algo-op__duration-options {
-  display: flex;
-  gap: 8px;
-}
-
-.algo-op__duration-btn {
-  font-family: 'Space Mono', monospace;
-  font-weight: 700;
-  font-size: 14px;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.algo-op__duration-btn.is-selected {
-  background: var(--blue);
-  color: var(--white);
-  border-color: var(--blue);
-}
-
-.algo-op__actions-row {
-  display: flex;
-  gap: 14px;
-}
-
-.algo-op__start {
-  font-size: 18px;
-  padding: 18px 32px;
-  border-radius: 8px;
-}
-
-.algo-op__reveal {
-  font-family: 'Sora', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  padding: 18px 32px;
-  background: transparent;
-  color: var(--gold);
-  border: 2px solid var(--gold);
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.algo-op__reveal.is-revealed {
-  background: var(--gold);
-  color: var(--bg);
 }
 
 .algo-op__answer-panel {
@@ -106,8 +16,4 @@
   font-weight: 800;
   color: var(--gold);
   margin-top: 8px;
-}
-
-@media (max-width: 980px) {
-  .algo-op__body { grid-template-columns: 1fr; }
 }

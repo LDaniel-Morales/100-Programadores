@@ -1,0 +1,24 @@
+.codigo-pub__answer {
+  max-width: 1000px;
+  margin: 28px auto 0;
+  background: var(--panel);
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: revealPop 0.5s ease-out;
+}
+
+.codigo-pub__answer-label {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.codigo-pub__answer-value {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--white);
+}
