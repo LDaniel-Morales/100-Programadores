@@ -9,7 +9,9 @@
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/menu-operador.css">
 <link rel="stylesheet" href="css/header-controls.css">
+<link rel="stylesheet" href="css/dynamic-shared.css">
 <link rel="stylesheet" href="css/operador.css">
+<link rel="stylesheet" href="css/operador-algo.css">
 </head>
 <body>
 
@@ -49,31 +51,31 @@
   </div>
 </section>
 
-<section class="view duelo-op" id="view-duelo" hidden>
-  <div class="duelo-op__header">
-    <div class="duelo-op__header-left">
-      <button class="btn-ghost duelo-op__back" id="backToMenuBtn">← Menú</button>
-      <div class="mono duelo-op__eyebrow">DUELO EN CURSO</div>
-      <div class="duelo-op__title">Control de resultado</div>
+<section class="view dyn-page" id="view-duelo" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="backToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow">DUELO EN CURSO</div>
+      <div class="dyn-header__title">Control de resultado</div>
     </div>
     <div class="header-controls" id="headerControls-duelo"></div>
   </div>
 
   <div class="duelo-op__players">
     <div class="duelo-op__player-card">
-      <div class="mono duelo-op__label">JUGADOR 1</div>
+      <div class="mono dyn-label">JUGADOR 1</div>
       <div class="duelo-op__player-name" id="player1Name" contenteditable="true" spellcheck="false"></div>
     </div>
     <div class="duelo-op__player-card">
-      <div class="mono duelo-op__label">JUGADOR 2</div>
+      <div class="mono dyn-label">JUGADOR 2</div>
       <div class="duelo-op__player-name" id="player2Name" contenteditable="true" spellcheck="false"></div>
     </div>
   </div>
 
-  <div class="duelo-op__section">
-    <div class="duelo-op__section-head">
-      <div class="mono duelo-op__label">// RETO</div>
-      <div class="duelo-op__actions">
+  <div class="dyn-section">
+    <div class="dyn-section-head">
+      <div class="mono dyn-label">// RETO</div>
+      <div class="dyn-actions">
         <button class="btn-ghost" id="nextChallengeBtn">Cambiar reto</button>
         <button class="btn-ghost" id="rerollLanguageBtn">Sortear lenguaje</button>
       </div>
@@ -81,15 +83,15 @@
     <div class="duelo-op__challenge-card">
       <div class="duelo-op__challenge-head">
         <div class="duelo-op__challenge-name" id="challengeName"></div>
-        <div class="mono duelo-op__lang-badge" id="languageBadge"></div>
+        <div class="mono dyn-lang-badge" id="languageBadge"></div>
       </div>
       <div class="duelo-op__challenge-statement" id="challengeStatement"></div>
       <div id="challengeSamples"></div>
     </div>
   </div>
 
-  <div class="duelo-op__section">
-    <div class="mono duelo-op__label duelo-op__winner-label">// DECLARAR GANADOR</div>
+  <div class="dyn-section">
+    <div class="mono dyn-label duelo-op__winner-label">// DECLARAR GANADOR</div>
     <div class="duelo-op__winner-grid">
       <button class="duelo-op__winner-btn duelo-op__winner-btn--1" id="declareWinner1"></button>
       <button class="duelo-op__winner-btn duelo-op__winner-btn--2" id="declareWinner2"></button>
@@ -98,10 +100,53 @@
   </div>
 </section>
 
+<section class="view dyn-page" id="view-algoritmo" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="algoBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow" id="algoChallengeCounter"></div>
+      <div class="dyn-header__title">¿Qué algoritmo es este?</div>
+    </div>
+    <div class="header-controls" id="headerControls-algoritmo"></div>
+  </div>
+
+  <div class="algo-op__body">
+    <div class="algo-op__main">
+      <div class="dyn-section-head algo-op__nav-head">
+        <div class="mono dyn-label">// RETO</div>
+        <div class="dyn-actions">
+          <button class="btn-ghost" id="prevChallengeBtn">← Reto anterior</button>
+          <button class="btn-ghost" id="nextChallengeBtnAlgo">Reto siguiente →</button>
+        </div>
+      </div>
+
+      <div class="mono dyn-label algo-op__lang" id="algoLang"></div>
+      <div class="algo-op__code" id="algoCode"></div>
+
+      <div class="algo-op__duration-row">
+        <div class="mono dyn-label">DURACIÓN</div>
+        <div class="algo-op__duration-options" id="algoDurationOptions"></div>
+      </div>
+
+      <div class="algo-op__actions-row">
+        <button class="btn-primary algo-op__start" id="startTimerBtn"></button>
+        <button class="algo-op__reveal" id="revealAnswerBtn">Revelar nombre</button>
+      </div>
+    </div>
+
+    <div class="algo-op__answer-panel">
+      <div class="mono dyn-label">SOLO OPERADOR · RESPUESTA</div>
+      <div class="algo-op__answer-value" id="algoAnswer"></div>
+    </div>
+  </div>
+</section>
+
 <script src="js/broadcast.js"></script>
 <script src="data/duelo-defaults.js"></script>
 <script src="data/menu-defaults.js"></script>
+<script src="data/algo-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
+<script src="js/algo-store.js"></script>
 <script src="js/menu-store.js"></script>
 <script src="js/operator-nav-store.js"></script>
 <script src="js/public-view-store.js"></script>
@@ -110,14 +155,17 @@
 <script src="js/header-controls.js"></script>
 <script src="js/menu-operador.js"></script>
 <script src="js/operador-duelo.js"></script>
+<script src="js/operador-algo.js"></script>
 <script>
   function goToMenu() {
     window.OperatorNavStore.setView('menu');
     window.ViewSections.activate('menu');
   }
   document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
+  document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);
 
   window.HeaderControls.mount(document.getElementById('headerControls-duelo'), 'duelo');
+  window.HeaderControls.mount(document.getElementById('headerControls-algoritmo'), 'algoritmo');
 
   window.ViewSections.activate(window.OperatorNavStore.getView());
 </script>

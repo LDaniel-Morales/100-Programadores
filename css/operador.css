@@ -1,36 +1,3 @@
-.duelo-op {
-  min-height: 100vh;
-  background: var(--bg);
-  padding: 0 0 48px;
-}
-
-.duelo-op__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 24px 40px 24px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border-gold);
-  flex-wrap: wrap;
-}
-
-.duelo-op__back {
-  margin-bottom: 24px;
-}
-
-.duelo-op__eyebrow {
-  font-size: 13px;
-  letter-spacing: 2px;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-
-.duelo-op__title {
-  font-size: 26px;
-  font-weight: 800;
-}
-
 .duelo-op__players {
   padding: 32px 40px;
   display: grid;
@@ -45,12 +12,6 @@
   padding: 24px;
 }
 
-.duelo-op__label {
-  font-size: 11px;
-  letter-spacing: 2px;
-  color: var(--muted);
-}
-
 .duelo-op__player-name {
   font-size: 22px;
   font-weight: 800;
@@ -60,41 +21,6 @@
 
 .duelo-op__player-name:focus {
   color: var(--gold);
-}
-
-.duelo-op__section {
-  padding: 8px 40px 32px;
-}
-
-.duelo-op__section-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.duelo-op__section-head .duelo-op__label {
-  font-size: 12px;
-}
-
-.duelo-op__actions {
-  display: flex;
-  gap: 10px;
-}
-
-.btn-ghost {
-  font-size: 12px;
-  padding: 8px 14px;
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.btn-ghost:hover {
-  color: var(--gold);
-  border-color: var(--gold);
 }
 
 .duelo-op__challenge-card {
@@ -115,15 +41,6 @@
 .duelo-op__challenge-name {
   font-size: 20px;
   font-weight: 800;
-}
-
-.duelo-op__lang-badge {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--bg);
-  background: var(--gold);
-  padding: 5px 14px;
-  border-radius: 6px;
 }
 
 .duelo-op__challenge-statement {

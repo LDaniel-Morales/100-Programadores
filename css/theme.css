@@ -48,3 +48,9 @@ button {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
+
+@keyframes scaleGlow {
+  0% { opacity: 0; transform: scale(0.7); text-shadow: 0 0 0 rgba(207, 163, 78, 0); }
+  60% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); text-shadow: 0 0 40px rgba(207, 163, 78, 0.6); }
+}

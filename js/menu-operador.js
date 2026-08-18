@@ -29,11 +29,14 @@
 
   window.NextDynamicField.mount(nextDynamicInput);
 
-  const dueloCount = window.DueloStore.getContent().challenges.length;
+  const contentCounts = {
+    duelo: window.DueloStore.getContent().challenges.length,
+    algoritmo: window.AlgoStore.getContent().challenges.length,
+  };
 
   const gridEl = document.getElementById('menuDynamics');
   content.dynamics.forEach((d) => {
-    const count = d.id === 'duelo' ? dueloCount : d.count;
+    const count = d.id in contentCounts ? contentCounts[d.id] : d.count;
     const card = document.createElement('button');
     card.className = 'menu-op__card' + (d.implemented ? '' : ' is-disabled');
     card.innerHTML = `
