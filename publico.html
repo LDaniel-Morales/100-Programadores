@@ -7,11 +7,22 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/menu-publico.css">
 <link rel="stylesheet" href="css/publico.css">
 </head>
 <body>
 
-<section class="duelo-pub">
+<section class="view menu-pub" id="view-menu">
+  <div class="menu-pub__rain" id="menuRain"></div>
+  <div class="menu-pub__content">
+    <div class="mono menu-pub__logo">&lt;100/&gt;</div>
+    <div class="mono menu-pub__brand">PROGRAMADORES</div>
+    <div class="menu-pub__next" id="pubNextDynamic"></div>
+    <div class="mono menu-pub__waiting"><span id="pubWaitingText"></span><span class="menu-pub__cursor">_</span></div>
+  </div>
+</section>
+
+<section class="view duelo-pub" id="view-duelo" hidden>
   <div class="duelo-pub__versus">
     <div class="duelo-pub__side" id="side1">
       <div class="duelo-pub__player-name" id="pubPlayer1"></div>
@@ -37,9 +48,17 @@
   <div class="duelo-pub__confetti" id="confettiLayer"></div>
 </section>
 
-<script src="data/duelo-defaults.js"></script>
 <script src="js/broadcast.js"></script>
+<script src="data/duelo-defaults.js"></script>
+<script src="data/menu-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
+<script src="js/menu-store.js"></script>
+<script src="js/app-store.js"></script>
+<script src="js/app-view.js"></script>
+<script src="js/menu-publico.js"></script>
 <script src="js/publico-duelo.js"></script>
+<script>
+  window.AppView.init(true);
+</script>
 </body>
 </html>

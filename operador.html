@@ -7,12 +7,50 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/menu-operador.css">
 <link rel="stylesheet" href="css/operador.css">
 </head>
 <body>
 
-<section class="duelo-op">
+<section class="view menu-op" id="view-menu">
+  <div class="menu-op__topbar">
+    <div class="menu-op__brand">
+      <div class="mono menu-op__logo">&lt;100/&gt;</div>
+      <div>
+        <div class="menu-op__title">Panel de control</div>
+        <div class="mono menu-op__session">sesión: <span id="sessionName"></span></div>
+      </div>
+    </div>
+    <div class="menu-op__status">
+      <div class="menu-op__projector">
+        <span class="menu-op__dot"></span>
+        proyector conectado
+      </div>
+      <button class="btn-outline" id="contentEditorBtn">Editor de contenido</button>
+      <button class="btn-primary" id="openPublicoBtn">Abrir vista de Público ↗</button>
+    </div>
+  </div>
+
+  <div class="menu-op__editable">
+    <div class="menu-op__field">
+      <label class="mono menu-op__field-label" for="sessionNameInput">Nombre de la sesión</label>
+      <input class="menu-op__field-input" id="sessionNameInput" type="text" spellcheck="false">
+    </div>
+    <div class="menu-op__field">
+      <label class="mono menu-op__field-label" for="nextDynamicInput">Próxima dinámica (anuncio en Público)</label>
+      <input class="menu-op__field-input" id="nextDynamicInput" type="text" spellcheck="false">
+    </div>
+  </div>
+
+  <div class="menu-op__dynamics">
+    <div class="mono menu-op__dynamics-label">// SELECCIONAR DINÁMICA</div>
+    <div class="menu-op__grid" id="menuDynamics"></div>
+  </div>
+</section>
+
+<section class="view duelo-op" id="view-duelo" hidden>
   <div class="duelo-op__header">
+    <button class="btn-ghost duelo-op__back" id="backToMenuBtn">← Menú</button>
     <div class="mono duelo-op__eyebrow">DUELO EN CURSO</div>
     <div class="duelo-op__title">Control de resultado</div>
   </div>
@@ -56,9 +94,18 @@
   </div>
 </section>
 
-<script src="data/duelo-defaults.js"></script>
 <script src="js/broadcast.js"></script>
+<script src="data/duelo-defaults.js"></script>
+<script src="data/menu-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
+<script src="js/menu-store.js"></script>
+<script src="js/app-store.js"></script>
+<script src="js/app-view.js"></script>
+<script src="js/menu-operador.js"></script>
 <script src="js/operador-duelo.js"></script>
+<script>
+  document.getElementById('backToMenuBtn').addEventListener('click', () => window.AppView.show('menu'));
+  window.AppView.init(false);
+</script>
 </body>
 </html>

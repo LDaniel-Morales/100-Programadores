@@ -1,0 +1,82 @@
+@keyframes fall {
+  from { transform: translateY(-110%); }
+  to { transform: translateY(110vh); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.menu-pub {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 40%, #173B6C 0%, #0B2545 40%, #0A0A0A 85%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-pub__rain {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.35;
+}
+
+.menu-pub__rain-col {
+  width: 1px;
+  position: relative;
+  height: 100%;
+}
+
+.menu-pub__rain-text {
+  position: absolute;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--gold);
+  white-space: pre;
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.menu-pub__content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+}
+
+.menu-pub__logo {
+  font-size: 96px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -2px;
+  margin-bottom: 4px;
+}
+
+.menu-pub__brand {
+  font-size: 26px;
+  letter-spacing: 10px;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+
+.menu-pub__next {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.menu-pub__waiting {
+  font-size: 22px;
+  color: var(--muted);
+}
+
+.menu-pub__cursor {
+  color: var(--gold);
+  animation: blink 1s step-end infinite;
+}

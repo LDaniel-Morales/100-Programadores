@@ -5,9 +5,13 @@
 }
 
 .duelo-op__header {
-  padding: 56px 40px 24px;
+  padding: 24px 40px 24px;
   background: var(--panel);
   border-bottom: 1px solid var(--border-gold);
+}
+
+.duelo-op__back {
+  margin-bottom: 24px;
 }
 
 .duelo-op__eyebrow {
