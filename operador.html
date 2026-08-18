@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Programadores Dijeron — Operador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/operador.css">
+</head>
+<body>
+
+<section class="duelo-op">
+  <div class="duelo-op__header">
+    <div class="mono duelo-op__eyebrow">DUELO EN CURSO</div>
+    <div class="duelo-op__title">Control de resultado</div>
+  </div>
+
+  <div class="duelo-op__players">
+    <div class="duelo-op__player-card">
+      <div class="mono duelo-op__label">JUGADOR 1</div>
+      <div class="duelo-op__player-name" id="player1Name" contenteditable="true" spellcheck="false"></div>
+    </div>
+    <div class="duelo-op__player-card">
+      <div class="mono duelo-op__label">JUGADOR 2</div>
+      <div class="duelo-op__player-name" id="player2Name" contenteditable="true" spellcheck="false"></div>
+    </div>
+  </div>
+
+  <div class="duelo-op__section">
+    <div class="duelo-op__section-head">
+      <div class="mono duelo-op__label">// RETO</div>
+      <div class="duelo-op__actions">
+        <button class="btn-ghost" id="nextChallengeBtn">Cambiar reto</button>
+        <button class="btn-ghost" id="rerollLanguageBtn">Sortear lenguaje</button>
+      </div>
+    </div>
+    <div class="duelo-op__challenge-card">
+      <div class="duelo-op__challenge-head">
+        <div class="duelo-op__challenge-name" id="challengeName"></div>
+        <div class="mono duelo-op__lang-badge" id="languageBadge"></div>
+      </div>
+      <div class="duelo-op__challenge-statement" id="challengeStatement"></div>
+      <div id="challengeSamples"></div>
+    </div>
+  </div>
+
+  <div class="duelo-op__section">
+    <div class="mono duelo-op__label duelo-op__winner-label">// DECLARAR GANADOR</div>
+    <div class="duelo-op__winner-grid">
+      <button class="duelo-op__winner-btn duelo-op__winner-btn--1" id="declareWinner1"></button>
+      <button class="duelo-op__winner-btn duelo-op__winner-btn--2" id="declareWinner2"></button>
+    </div>
+    <button class="btn-ghost duelo-op__reset" id="resetDuelBtn" hidden>Reiniciar duelo</button>
+  </div>
+</section>
+
+<script src="data/duelo-defaults.js"></script>
+<script src="js/broadcast.js"></script>
+<script src="js/duelo-store.js"></script>
+<script src="js/operador-duelo.js"></script>
+</body>
+</html>
