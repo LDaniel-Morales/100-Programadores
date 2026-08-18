@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/timed-challenge-public.css">
 <link rel="stylesheet" href="css/publico-algo.css">
 <link rel="stylesheet" href="css/publico-codigo.css">
+<link rel="stylesheet" href="css/publico-trivia.css">
 </head>
 <body>
 
@@ -89,14 +90,21 @@
   </div>
 </section>
 
+<section class="view trivia-pub" id="view-trivia" hidden>
+  <div class="trivia-pub__title" id="triviaPubTitle"></div>
+  <div class="trivia-pub__grid" id="triviaPubGrid"></div>
+</section>
+
 <script src="js/broadcast.js"></script>
 <script src="data/duelo-defaults.js"></script>
 <script src="data/menu-defaults.js"></script>
 <script src="data/algo-defaults.js"></script>
 <script src="data/codigo-defaults.js"></script>
+<script src="data/trivia-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
 <script src="js/algo-store.js"></script>
 <script src="js/codigo-store.js"></script>
+<script src="js/trivia-store.js"></script>
 <script src="js/menu-store.js"></script>
 <script src="js/public-view-store.js"></script>
 <script src="js/view-sections.js"></script>
@@ -104,6 +112,7 @@
 <script src="js/publico-duelo.js"></script>
 <script src="js/publico-algo.js"></script>
 <script src="js/publico-codigo.js"></script>
+<script src="js/publico-trivia.js"></script>
 <script>
   window.PublicViewStore.onChange(window.ViewSections.activate);
   window.ViewSections.activate(window.PublicViewStore.getView());

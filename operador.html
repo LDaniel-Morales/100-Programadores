@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/public-preview.css">
 <link rel="stylesheet" href="css/operador.css">
 <link rel="stylesheet" href="css/operador-algo.css">
+<link rel="stylesheet" href="css/operador-trivia.css">
 </head>
 <body>
 
@@ -180,14 +181,39 @@
   </div>
 </section>
 
+<section class="view dyn-page" id="view-trivia" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="triviaBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow" id="triviaQuestionCounter"></div>
+      <div class="dyn-header__title trivia-op__title" id="triviaQuestionTitle"></div>
+    </div>
+    <div class="header-controls" id="headerControls-trivia"></div>
+  </div>
+
+  <div class="dyn-section">
+    <div class="trivia-op__grid" id="triviaAnswers"></div>
+
+    <div class="trivia-op__footer">
+      <div class="trivia-op__nav">
+        <button class="trivia-op__nav-btn" id="prevQuestionBtn">← Pregunta anterior</button>
+        <button class="trivia-op__nav-btn" id="nextQuestionBtn">Pregunta siguiente →</button>
+      </div>
+      <button class="trivia-op__reset-btn" id="resetBoardBtn">Reiniciar tablero</button>
+    </div>
+  </div>
+</section>
+
 <script src="js/broadcast.js"></script>
 <script src="data/duelo-defaults.js"></script>
 <script src="data/menu-defaults.js"></script>
 <script src="data/algo-defaults.js"></script>
 <script src="data/codigo-defaults.js"></script>
+<script src="data/trivia-defaults.js"></script>
 <script src="js/duelo-store.js"></script>
 <script src="js/algo-store.js"></script>
 <script src="js/codigo-store.js"></script>
+<script src="js/trivia-store.js"></script>
 <script src="js/menu-store.js"></script>
 <script src="js/operator-nav-store.js"></script>
 <script src="js/public-view-store.js"></script>
@@ -199,6 +225,7 @@
 <script src="js/operador-duelo.js"></script>
 <script src="js/operador-algo.js"></script>
 <script src="js/operador-codigo.js"></script>
+<script src="js/operador-trivia.js"></script>
 <script>
   function goToMenu() {
     window.OperatorNavStore.setView('menu');
@@ -207,10 +234,12 @@
   document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('codigoBackToMenuBtn').addEventListener('click', goToMenu);
+  document.getElementById('triviaBackToMenuBtn').addEventListener('click', goToMenu);
 
   window.HeaderControls.mount(document.getElementById('headerControls-duelo'), 'duelo');
   window.HeaderControls.mount(document.getElementById('headerControls-algoritmo'), 'algoritmo');
   window.HeaderControls.mount(document.getElementById('headerControls-codigo'), 'codigo');
+  window.HeaderControls.mount(document.getElementById('headerControls-trivia'), 'trivia');
 
   window.ViewSections.activate(window.OperatorNavStore.getView());
 </script>

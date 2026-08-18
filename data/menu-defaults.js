@@ -4,7 +4,7 @@ window.MENU_DEFAULTS = {
   nextDynamic: 'A PUNTO DE INICIAR: DUELO DE PROGRAMACIÓN',
   waitingText: 'preparen sus teclados',
   dynamics: [
-    { id: 'trivia', name: 'Trivia Popular', icon: 'circle', count: 84, implemented: false },
+    { id: 'trivia', name: 'Trivia Popular', icon: 'circle', count: null, implemented: true, view: 'trivia' },
     { id: 'codigo', name: '¿Qué dice el código?', icon: 'code', count: null, implemented: true, view: 'codigo' },
     { id: 'algoritmo', name: 'Adivina el Algoritmo', icon: 'diamond', count: null, implemented: true, view: 'algoritmo' },
     { id: 'duelo', name: 'Duelo de Programación', icon: 'duel', count: null, implemented: true, view: 'duelo' },

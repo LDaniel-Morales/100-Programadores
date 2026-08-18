@@ -33,6 +33,7 @@
     duelo: window.DueloStore.getContent().challenges.length,
     algoritmo: window.AlgoStore.getContent().challenges.length,
     codigo: window.CodigoStore.getContent().challenges.length,
+    trivia: window.TriviaStore.getContent().questions.length,
   };
 
   const gridEl = document.getElementById('menuDynamics');
