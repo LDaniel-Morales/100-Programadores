@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Programadores Dijeron — Público</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/menu-publico.css">
+<link rel="stylesheet" href="css/publico.css">
+<link rel="stylesheet" href="css/timed-challenge-public.css">
+<link rel="stylesheet" href="css/publico-algo.css">
+<link rel="stylesheet" href="css/publico-codigo.css">
+<link rel="stylesheet" href="css/publico-trivia.css">
+</head>
+<body>
+
+<section class="view menu-pub" id="view-menu">
+  <div class="menu-pub__rain" id="menuRain"></div>
+  <div class="menu-pub__content">
+    <div class="mono menu-pub__logo">&lt;100/&gt;</div>
+    <div class="mono menu-pub__brand">PROGRAMADORES</div>
+    <div class="menu-pub__next" id="pubNextDynamic"></div>
+    <div class="mono menu-pub__waiting"><span id="pubWaitingText"></span><span class="menu-pub__cursor">_</span></div>
+  </div>
+</section>
+
+<section class="view duelo-pub" id="view-duelo" hidden>
+  <div class="duelo-pub__versus">
+    <div class="duelo-pub__side" id="side1">
+      <div class="duelo-pub__player-name" id="pubPlayer1"></div>
+      <div class="mono duelo-pub__winner-badge" id="winnerBadge1" hidden>GANADOR</div>
+    </div>
+    <div class="mono duelo-pub__vs">VS</div>
+    <div class="duelo-pub__side" id="side2">
+      <div class="duelo-pub__player-name" id="pubPlayer2"></div>
+      <div class="mono duelo-pub__winner-badge" id="winnerBadge2" hidden>GANADOR</div>
+    </div>
+  </div>
+
+  <div class="duelo-pub__challenge">
+    <div class="duelo-pub__challenge-head">
+      <div class="duelo-pub__challenge-name" id="pubChallengeName"></div>
+      <div class="mono duelo-pub__lang-badge" id="pubLanguageBadge"></div>
+    </div>
+    <div class="duelo-pub__challenge-statement" id="pubChallengeStatement"></div>
+    <div class="duelo-pub__samples" id="pubChallengeSamples"></div>
+  </div>
+
+  <div class="duelo-pub__flash" id="flashOverlay" hidden></div>
+  <div class="duelo-pub__confetti" id="confettiLayer"></div>
+</section>
+
+<section class="view tcp-page" id="view-algoritmo" hidden>
+  <div class="tcp-top">
+    <div class="tcp-title">¿Qué algoritmo es este?</div>
+    <div class="tcp-timer">
+      <svg width="150" height="150" viewBox="0 0 150 150" class="tcp-timer-svg">
+        <circle cx="75" cy="75" r="64" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"></circle>
+        <circle cx="75" cy="75" r="64" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" class="tcp-timer-ring" id="algoTimerRing"></circle>
+      </svg>
+      <div class="mono tcp-timer-label" id="algoTimerLabel"></div>
+    </div>
+  </div>
+
+  <div class="mono algo-pub__lang" id="algoPubLang"></div>
+  <div class="tcp-code" id="algoPubCode"></div>
+
+  <div class="algo-pub__answer" id="algoPubAnswer" hidden></div>
+</section>
+
+<section class="view tcp-page" id="view-codigo" hidden>
+  <div class="tcp-top">
+    <div class="tcp-title">¿Qué imprime este código?</div>
+    <div class="tcp-timer">
+      <svg width="150" height="150" viewBox="0 0 150 150" class="tcp-timer-svg">
+        <circle cx="75" cy="75" r="64" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"></circle>
+        <circle cx="75" cy="75" r="64" fill="none" stroke-width="10" stroke-linecap="round" stroke-dasharray="402" class="tcp-timer-ring" id="codigoTimerRing"></circle>
+      </svg>
+      <div class="mono tcp-timer-label" id="codigoTimerLabel"></div>
+    </div>
+  </div>
+
+  <div class="tcp-code" id="codigoPubCode"></div>
+
+  <div class="codigo-pub__answer" id="codigoPubAnswer" hidden>
+    <div class="mono codigo-pub__answer-label">RESPUESTA</div>
+    <div class="mono codigo-pub__answer-value" id="codigoPubAnswerValue"></div>
+  </div>
+</section>
+
+<section class="view trivia-pub" id="view-trivia" hidden>
+  <div class="trivia-pub__title" id="triviaPubTitle"></div>
+  <div class="trivia-pub__grid" id="triviaPubGrid"></div>
+</section>
+
+<script src="js/broadcast.js"></script>
+<script src="data/duelo-defaults.js"></script>
+<script src="data/menu-defaults.js"></script>
+<script src="data/algo-defaults.js"></script>
+<script src="data/codigo-defaults.js"></script>
+<script src="data/trivia-defaults.js"></script>
+<script src="js/duelo-store.js"></script>
+<script src="js/algo-store.js"></script>
+<script src="js/codigo-store.js"></script>
+<script src="js/trivia-store.js"></script>
+<script src="js/menu-store.js"></script>
+<script src="js/public-view-store.js"></script>
+<script src="js/view-sections.js"></script>
+<script src="js/menu-publico.js"></script>
+<script src="js/publico-duelo.js"></script>
+<script src="js/publico-algo.js"></script>
+<script src="js/publico-codigo.js"></script>
+<script src="js/publico-trivia.js"></script>
+<script>
+  window.PublicViewStore.onChange(window.ViewSections.activate);
+  window.ViewSections.activate(window.PublicViewStore.getView());
+  window.EventoChannel.on('public:view', (payload) => {
+    window.PublicViewStore.setView(payload.view, { broadcast: false });
+  });
+</script>
+</body>
+</html>

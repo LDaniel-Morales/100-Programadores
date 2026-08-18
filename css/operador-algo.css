@@ -1,0 +1,19 @@
+.algo-op__lang {
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.algo-op__answer-panel {
+  background: var(--panel);
+  border: 1px dashed rgba(207, 163, 78, 0.5);
+  border-radius: 8px;
+  padding: 20px 24px;
+  max-width: 420px;
+}
+
+.algo-op__answer-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-top: 8px;
+}
