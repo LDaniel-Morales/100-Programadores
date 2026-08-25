@@ -28,6 +28,7 @@
   });
 
   window.NextDynamicField.mount(nextDynamicInput);
+  window.LiveSwitch.mount(document.getElementById('menuLiveSwitch'), 'menu');
 
   const contentCounts = {
     duelo: window.DueloStore.getContent().challenges.length,

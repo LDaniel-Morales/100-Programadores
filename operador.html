@@ -43,7 +43,10 @@
       <input class="menu-op__field-input" id="sessionNameInput" type="text" spellcheck="false">
     </div>
     <div class="menu-op__field">
-      <label class="mono menu-op__field-label" for="nextDynamicInput">Próxima dinámica (anuncio en Público)</label>
+      <div class="menu-op__field-head">
+        <label class="mono menu-op__field-label" for="nextDynamicInput">Próxima dinámica (anuncio en Público)</label>
+        <div class="header-controls__switch-group" id="menuLiveSwitch"></div>
+      </div>
       <input class="menu-op__field-input" id="nextDynamicInput" type="text" spellcheck="false">
     </div>
   </div>
@@ -219,6 +222,7 @@
 <script src="js/public-view-store.js"></script>
 <script src="js/view-sections.js"></script>
 <script src="js/next-dynamic-field.js"></script>
+<script src="js/live-switch.js"></script>
 <script src="js/header-controls.js"></script>
 <script src="js/public-preview.js"></script>
 <script src="js/menu-operador.js"></script>
@@ -230,6 +234,7 @@
   function goToMenu() {
     window.OperatorNavStore.setView('menu');
     window.ViewSections.activate('menu');
+    window.PublicViewStore.setView('menu');
   }
   document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);
