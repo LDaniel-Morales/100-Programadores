@@ -3,6 +3,13 @@
   min-height: 100vh;
   background: var(--bg);
   display: flex;
+  flex-direction: column;
+}
+
+.duelo-pub__body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
 }
 
 .duelo-pub__versus {

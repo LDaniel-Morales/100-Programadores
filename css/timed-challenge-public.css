@@ -5,7 +5,11 @@
   position: relative;
   min-height: 100vh;
   background: radial-gradient(ellipse at 50% 0%, #173B6C 0%, #0B2545 45%, #0A0A0A 85%);
-  padding: 56px 64px;
+  box-sizing: border-box;
+}
+
+.tcp-body {
+  padding: 32px 64px 56px;
   box-sizing: border-box;
 }
 

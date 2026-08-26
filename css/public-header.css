@@ -1,0 +1,32 @@
+.public-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid var(--border-gold);
+  flex-shrink: 0;
+}
+
+.public-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.public-header__logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.public-header__session {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.public-header__counter {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}

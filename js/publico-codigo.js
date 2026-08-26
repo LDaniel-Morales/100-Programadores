@@ -9,10 +9,13 @@
     answerValue: document.getElementById('codigoPubAnswerValue'),
   };
 
+  const header = window.PublicHeader.mount(document.getElementById('codigoPubHeader'));
   const CIRCUMFERENCE = 402;
 
   function render(state) {
     const challenge = content.challenges[state.challengeIndex];
+
+    header.setCounter(`EJERCICIO ${state.challengeIndex + 1} / ${content.challenges.length}`);
 
     el.code.innerHTML = '';
     challenge.lines.forEach((tokens) => {

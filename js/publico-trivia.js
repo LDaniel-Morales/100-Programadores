@@ -6,9 +6,12 @@
     grid: document.getElementById('triviaPubGrid'),
   };
 
+  const header = window.PublicHeader.mount(document.getElementById('triviaPubHeader'));
+
   function render(state) {
     const question = content.questions[state.questionIndex];
 
+    header.setCounter(`PREGUNTA ${state.questionIndex + 1} / ${content.questions.length}`);
     el.title.textContent = question.text;
 
     el.grid.innerHTML = '';
