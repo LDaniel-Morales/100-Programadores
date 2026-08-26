@@ -32,6 +32,10 @@
   gap: 16px;
 }
 
+.trivia-pub__strikes.is-empty {
+  visibility: hidden;
+}
+
 .trivia-pub__strike {
   font-size: 48px;
   font-weight: 800;

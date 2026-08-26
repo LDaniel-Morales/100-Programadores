@@ -10,13 +10,16 @@
   };
 
   const header = window.PublicHeader.mount(document.getElementById('triviaPubHeader'));
-  let prevStrikes = window.TriviaStore.getState().strikes;
 
   function playStrikeFlash() {
     el.strikeFlash.classList.remove('is-flashing');
     void el.strikeFlash.offsetWidth;
     el.strikeFlash.classList.add('is-flashing');
   }
+  el.strikeFlash.addEventListener('animationend', () => {
+    el.strikeFlash.classList.remove('is-flashing');
+  });
+  window.EventoChannel.on('trivia:strike-flash', playStrikeFlash);
 
   function render(state) {
     const question = content.questions[state.questionIndex];
@@ -24,6 +27,7 @@
     header.setCounter(`PREGUNTA ${state.questionIndex + 1} / ${content.questions.length}`);
     el.title.textContent = question.text;
 
+    el.strikes.classList.toggle('is-empty', state.strikes === 0);
     el.strikes.innerHTML = '';
     [1, 2, 3].forEach((n) => {
       const mark = document.createElement('span');
@@ -31,9 +35,6 @@
       mark.textContent = '✕';
       el.strikes.appendChild(mark);
     });
-
-    if (state.strikes > prevStrikes) playStrikeFlash();
-    prevStrikes = state.strikes;
 
     el.steal.hidden = !state.stealing;
 

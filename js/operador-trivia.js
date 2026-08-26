@@ -9,7 +9,8 @@
     prevBtn: document.getElementById('prevQuestionBtn'),
     nextBtn: document.getElementById('nextQuestionBtn'),
     resetBtn: document.getElementById('resetBoardBtn'),
-    strikeButtons: document.getElementById('strikeButtons'),
+    strikeMarks: document.getElementById('strikeMarks'),
+    strikeBtn: document.getElementById('strikeBtn'),
     stealBtn: document.getElementById('stealBtn'),
   };
 
@@ -31,9 +32,11 @@
     render();
   }
 
-  function setStrikes(n) {
-    state = { ...state, strikes: state.strikes === n ? 0 : n };
+  function addStrike() {
+    if (state.strikes >= 3) return;
+    state = { ...state, strikes: state.strikes + 1 };
     save();
+    window.EventoChannel.send('trivia:strike-flash', {});
     render();
   }
 
@@ -79,14 +82,14 @@
     el.prevBtn.disabled = state.questionIndex === 0;
     el.nextBtn.disabled = state.questionIndex === content.questions.length - 1;
 
-    el.strikeButtons.innerHTML = '';
+    el.strikeMarks.innerHTML = '';
     [1, 2, 3].forEach((n) => {
-      const btn = document.createElement('button');
-      btn.className = 'trivia-op__strike-btn' + (state.strikes >= n ? ' is-active' : '');
-      btn.textContent = '✕';
-      btn.addEventListener('click', () => setStrikes(n));
-      el.strikeButtons.appendChild(btn);
+      const mark = document.createElement('span');
+      mark.className = 'trivia-op__strike-mark' + (state.strikes >= n ? ' is-active' : '');
+      mark.textContent = '✕';
+      el.strikeMarks.appendChild(mark);
     });
+    el.strikeBtn.disabled = state.strikes >= 3;
 
     el.stealBtn.classList.toggle('is-active', state.stealing);
     el.stealBtn.textContent = state.stealing ? 'Robando puntos' : 'Robar puntos';
@@ -112,6 +115,7 @@
   el.prevBtn.addEventListener('click', () => goToQuestion(state.questionIndex - 1));
   el.nextBtn.addEventListener('click', () => goToQuestion(state.questionIndex + 1));
   el.resetBtn.addEventListener('click', resetBoard);
+  el.strikeBtn.addEventListener('click', addStrike);
   el.stealBtn.addEventListener('click', toggleSteal);
 
   render();
