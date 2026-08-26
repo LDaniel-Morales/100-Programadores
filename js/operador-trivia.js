@@ -9,6 +9,8 @@
     prevBtn: document.getElementById('prevQuestionBtn'),
     nextBtn: document.getElementById('nextQuestionBtn'),
     resetBtn: document.getElementById('resetBoardBtn'),
+    strikeButtons: document.getElementById('strikeButtons'),
+    stealBtn: document.getElementById('stealBtn'),
   };
 
   function currentQuestion() {
@@ -25,6 +27,18 @@
 
   function reveal(ai) {
     state = { ...state, revealMap: { ...state.revealMap, [`${state.questionIndex}-${ai}`]: true } };
+    save();
+    render();
+  }
+
+  function setStrikes(n) {
+    state = { ...state, strikes: state.strikes === n ? 0 : n };
+    save();
+    render();
+  }
+
+  function toggleSteal() {
+    state = { ...state, stealing: !state.stealing };
     save();
     render();
   }
@@ -64,11 +78,23 @@
 
     el.prevBtn.disabled = state.questionIndex === 0;
     el.nextBtn.disabled = state.questionIndex === content.questions.length - 1;
+
+    el.strikeButtons.innerHTML = '';
+    [1, 2, 3].forEach((n) => {
+      const btn = document.createElement('button');
+      btn.className = 'trivia-op__strike-btn' + (state.strikes >= n ? ' is-active' : '');
+      btn.textContent = '✕';
+      btn.addEventListener('click', () => setStrikes(n));
+      el.strikeButtons.appendChild(btn);
+    });
+
+    el.stealBtn.classList.toggle('is-active', state.stealing);
+    el.stealBtn.textContent = state.stealing ? 'Robando puntos' : 'Robar puntos';
   }
 
   function goToQuestion(index) {
     const clamped = Math.max(0, Math.min(index, content.questions.length - 1));
-    state = { ...state, questionIndex: clamped };
+    state = { ...state, questionIndex: clamped, strikes: 0, stealing: false };
     save();
     render();
   }
@@ -78,7 +104,7 @@
     Object.keys(revealMap).forEach((key) => {
       if (key.startsWith(`${state.questionIndex}-`)) delete revealMap[key];
     });
-    state = { ...state, revealMap };
+    state = { ...state, revealMap, strikes: 0, stealing: false };
     save();
     render();
   }
@@ -86,6 +112,7 @@
   el.prevBtn.addEventListener('click', () => goToQuestion(state.questionIndex - 1));
   el.nextBtn.addEventListener('click', () => goToQuestion(state.questionIndex + 1));
   el.resetBtn.addEventListener('click', resetBoard);
+  el.stealBtn.addEventListener('click', toggleSteal);
 
   render();
 })();

@@ -12,11 +12,11 @@ window.TriviaStore = (function () {
   }
 
   function getState() {
+    const defaults = { questionIndex: 0, revealMap: {}, strikes: 0, stealing: false };
     const raw = localStorage.getItem(STATE_KEY);
-    if (raw) return JSON.parse(raw);
-    const state = { questionIndex: 0, revealMap: {} };
-    localStorage.setItem(STATE_KEY, JSON.stringify(state));
-    return state;
+    if (raw) return { ...defaults, ...JSON.parse(raw) };
+    localStorage.setItem(STATE_KEY, JSON.stringify(defaults));
+    return defaults;
   }
 
   function saveState(state, options) {
