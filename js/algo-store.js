@@ -30,5 +30,12 @@ window.AlgoStore = (function () {
     }
   }
 
-  return { getContent, getState, saveState };
+  function saveContent(content, options) {
+    localStorage.setItem(CONTENT_KEY, JSON.stringify(content));
+    if (!options || options.broadcast !== false) {
+      window.EventoChannel.send('algo:content', content);
+    }
+  }
+
+  return { getContent, getState, saveState, saveContent };
 })();

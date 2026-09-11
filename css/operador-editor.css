@@ -1,0 +1,280 @@
+/* Editor de contenido: formularios para editar preguntas/retos de las 4
+   dinámicas sin tocar los archivos de data/ a mano. */
+
+.editor-op__tabs {
+  display: flex;
+  gap: 10px;
+  padding: 24px 40px 0;
+  flex-wrap: wrap;
+}
+
+.editor-op__tab {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.editor-op__tab:hover {
+  color: var(--white);
+  border-color: var(--gold);
+}
+
+.editor-op__tab.is-active {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+}
+
+.editor-op__panel {
+  padding: 28px 40px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.editor-op__section-title {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--muted);
+}
+
+.editor-op__intro {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.editor-op__card {
+  background: var(--panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editor-op__card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.editor-op__card-title {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--gold);
+}
+
+.editor-op__delete-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  padding: 7px 14px;
+  background: transparent;
+  color: #c0392b;
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.editor-op__delete-btn:hover {
+  background: #c0392b;
+  color: var(--white);
+  border-color: #c0392b;
+}
+
+.editor-op__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.editor-op__field-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.editor-op__field-row > .editor-op__field {
+  flex: 1;
+  min-width: 160px;
+}
+
+.editor-op__label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.editor-op__input,
+.editor-op__textarea {
+  font-family: 'Sora', sans-serif;
+  font-size: 15px;
+  color: var(--white);
+  background: var(--panel-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 10px 14px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.editor-op__input:focus,
+.editor-op__textarea:focus {
+  border-color: var(--gold);
+}
+
+.editor-op__textarea {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  resize: vertical;
+  min-height: 110px;
+  white-space: pre;
+}
+
+.editor-op__input--number {
+  width: 90px;
+  flex: none;
+}
+
+.editor-op__answer-row,
+.editor-op__sample-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.editor-op__answer-rank {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--muted);
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.editor-op__answer-row .editor-op__input {
+  flex: 1;
+}
+
+.editor-op__sample-row .editor-op__field {
+  flex: 1;
+}
+
+.editor-op__row-delete {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  line-height: 1;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.editor-op__row-delete:hover {
+  color: #c0392b;
+  border-color: #c0392b;
+}
+
+.editor-op__add-row-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--gold);
+  border: 1px dashed rgba(207, 163, 78, 0.5);
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.editor-op__add-row-btn:hover {
+  background: rgba(207, 163, 78, 0.1);
+}
+
+.editor-op__add-card-btn {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 16px;
+  background: transparent;
+  color: var(--gold);
+  border: 2px dashed rgba(207, 163, 78, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.editor-op__add-card-btn:hover {
+  background: rgba(207, 163, 78, 0.08);
+  border-color: var(--gold);
+}
+
+.editor-op__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.editor-op__tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--white);
+  background: var(--panel-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 6px 8px 6px 14px;
+}
+
+.editor-op__tag-remove {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 13px;
+}
+
+.editor-op__tag-remove:hover {
+  background: #c0392b;
+}
+
+.editor-op__tag-input {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  color: var(--white);
+  background: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  padding: 7px 14px;
+  outline: none;
+  width: 160px;
+}
+
+.editor-op__tag-input:focus {
+  border-color: var(--gold);
+}
+

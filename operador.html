@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="css/operador.css">
 <link rel="stylesheet" href="css/operador-algo.css">
 <link rel="stylesheet" href="css/operador-trivia.css">
+<link rel="stylesheet" href="css/operador-editor.css">
 </head>
 <body>
 
@@ -232,6 +233,28 @@
   </div>
 </section>
 
+<section class="view dyn-page" id="view-editor" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="editorBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow">EDITOR DE CONTENIDO</div>
+      <div class="dyn-header__title">Preguntas y dinámicas</div>
+    </div>
+  </div>
+
+  <div class="editor-op__tabs" id="editorTabs">
+    <button class="editor-op__tab is-active" data-tab="trivia">Trivia Popular</button>
+    <button class="editor-op__tab" data-tab="codigo">¿Qué dice el código?</button>
+    <button class="editor-op__tab" data-tab="algoritmo">Adivina el Algoritmo</button>
+    <button class="editor-op__tab" data-tab="duelo">Duelo de Programación</button>
+  </div>
+
+  <div class="editor-op__panel" id="editorPanel-trivia"></div>
+  <div class="editor-op__panel" id="editorPanel-codigo" hidden></div>
+  <div class="editor-op__panel" id="editorPanel-algoritmo" hidden></div>
+  <div class="editor-op__panel" id="editorPanel-duelo" hidden></div>
+</section>
+
 <script src="js/broadcast.js"></script>
 <script src="data/duelo-defaults.js"></script>
 <script src="data/menu-defaults.js"></script>
@@ -255,6 +278,7 @@
 <script src="js/operador-algo.js"></script>
 <script src="js/operador-codigo.js"></script>
 <script src="js/operador-trivia.js"></script>
+<script src="js/operador-editor.js"></script>
 <script>
   function goToMenu() {
     window.OperatorNavStore.setView('menu');
@@ -265,6 +289,18 @@
   document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('codigoBackToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('triviaBackToMenuBtn').addEventListener('click', goToMenu);
+
+  document.getElementById('contentEditorBtn').addEventListener('click', () => {
+    window.OperatorNavStore.setView('editor');
+    window.ViewSections.activate('editor');
+  });
+
+  document.getElementById('editorBackToMenuBtn').addEventListener('click', () => {
+    // Recarga para que Trivia/Duelo/Algoritmo/Código tomen el contenido
+    // editado: cada uno lee su store una sola vez al cargar la página.
+    window.OperatorNavStore.setView('menu');
+    window.location.reload();
+  });
 
   window.HeaderControls.mount(document.getElementById('headerControls-duelo'), 'duelo');
   window.HeaderControls.mount(document.getElementById('headerControls-algoritmo'), 'algoritmo');
