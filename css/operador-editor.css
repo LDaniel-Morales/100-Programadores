@@ -76,20 +76,21 @@
 
 .editor-op__delete-btn {
   font-family: 'Space Mono', monospace;
+  font-weight: 700;
   font-size: 12px;
-  padding: 7px 14px;
-  background: transparent;
-  color: #c0392b;
-  border: 1px solid rgba(192, 57, 43, 0.4);
+  padding: 8px 16px;
+  background: rgba(224, 62, 45, 0.15);
+  color: #ff6b5b;
+  border: 1px solid #e03e2d;
   border-radius: 6px;
   cursor: pointer;
   flex-shrink: 0;
 }
 
 .editor-op__delete-btn:hover {
-  background: #c0392b;
+  background: #e03e2d;
   color: var(--white);
-  border-color: #c0392b;
+  border-color: #e03e2d;
 }
 
 .editor-op__field {
@@ -175,21 +176,23 @@
 
 .editor-op__row-delete {
   font-family: 'Space Mono', monospace;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 18px;
   line-height: 1;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--border-subtle);
+  background: rgba(224, 62, 45, 0.15);
+  color: #ff6b5b;
+  border: 1px solid #e03e2d;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .editor-op__row-delete:hover {
-  color: #c0392b;
-  border-color: #c0392b;
+  background: #e03e2d;
+  color: var(--white);
+  border-color: #e03e2d;
 }
 
 .editor-op__add-row-btn {
