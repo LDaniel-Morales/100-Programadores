@@ -3,6 +3,7 @@
 
   const el = {
     title: document.getElementById('triviaPubTitle'),
+    pointsValue: document.getElementById('triviaPubPointsValue'),
     grid: document.getElementById('triviaPubGrid'),
     strikes: document.getElementById('triviaPubStrikes'),
     steal: document.getElementById('triviaPubSteal'),
@@ -10,6 +11,7 @@
   };
 
   const header = window.PublicHeader.mount(document.getElementById('triviaPubHeader'));
+  let prevPoints = 0;
 
   function playStrikeFlash() {
     el.strikeFlash.classList.remove('is-flashing');
@@ -26,6 +28,18 @@
 
     header.setCounter(`PREGUNTA ${state.questionIndex + 1} / ${content.questions.length}`);
     el.title.textContent = question.text;
+
+    const points = question.answers.reduce((sum, ans, ai) => {
+      const revealed = !!state.revealMap[`${state.questionIndex}-${ai}`];
+      return sum + (revealed ? ans.points : 0);
+    }, 0);
+    el.pointsValue.textContent = points;
+    if (points > prevPoints) {
+      el.pointsValue.classList.remove('is-bump');
+      void el.pointsValue.offsetWidth;
+      el.pointsValue.classList.add('is-bump');
+    }
+    prevPoints = points;
 
     el.strikes.classList.toggle('is-empty', state.strikes === 0);
     el.strikes.innerHTML = '';

@@ -68,6 +68,8 @@
       clearInterval(intervalId);
       intervalId = null;
       state = { ...state, timeLeft: 0, running: false, revealed: true };
+      window.EventoChannel.send('audio:stop', 'cronometro');
+      window.EventoChannel.send('audio:play', 'revelarRespuesta');
     } else {
       state = { ...state, timeLeft: state.timeLeft - 1 };
     }
@@ -79,6 +81,7 @@
     clearInterval(intervalId);
     state = { ...state, timeLeft: state.duration, running: true, revealed: false };
     save();
+    window.EventoChannel.send('audio:play', 'cronometro');
     render();
     intervalId = setInterval(tick, 1000);
   }
@@ -91,8 +94,13 @@
   function revealAnswer() {
     clearInterval(intervalId);
     intervalId = null;
-    state = { ...state, revealed: !state.revealed, running: false };
+    const willReveal = !state.revealed;
+    state = { ...state, revealed: willReveal, running: false };
     save();
+    if (willReveal) {
+      window.EventoChannel.send('audio:stop', 'cronometro');
+      window.EventoChannel.send('audio:play', 'revelarRespuesta');
+    }
     render();
   }
 

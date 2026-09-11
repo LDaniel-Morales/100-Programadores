@@ -73,12 +73,14 @@
   el.declareWinner1.addEventListener('click', () => {
     state.winner = 1;
     save();
+    window.EventoChannel.send('audio:play', 'ganador');
     render();
   });
 
   el.declareWinner2.addEventListener('click', () => {
     state.winner = 2;
     save();
+    window.EventoChannel.send('audio:play', 'ganador');
     render();
   });
 

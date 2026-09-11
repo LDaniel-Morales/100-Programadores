@@ -6,12 +6,14 @@
     counter: document.getElementById('triviaQuestionCounter'),
     title: document.getElementById('triviaQuestionTitle'),
     answers: document.getElementById('triviaAnswers'),
+    pointsValue: document.getElementById('triviaPointsValue'),
     prevBtn: document.getElementById('prevQuestionBtn'),
     nextBtn: document.getElementById('nextQuestionBtn'),
     resetGameBtn: document.getElementById('resetGameBtnTrivia'),
     strikeMarks: document.getElementById('strikeMarks'),
     strikeBtn: document.getElementById('strikeBtn'),
     stealBtn: document.getElementById('stealBtn'),
+    winnerBtn: document.getElementById('winnerBtn'),
   };
 
   function currentQuestion() {
@@ -29,6 +31,7 @@
   function reveal(ai) {
     state = { ...state, revealMap: { ...state.revealMap, [`${state.questionIndex}-${ai}`]: true } };
     save();
+    window.EventoChannel.send('audio:play', 'revelarRespuesta');
     render();
   }
 
@@ -37,6 +40,7 @@
     state = { ...state, strikes: state.strikes + 1 };
     save();
     window.EventoChannel.send('trivia:strike-flash', {});
+    window.EventoChannel.send('audio:play', 'strike');
     render();
   }
 
@@ -79,6 +83,8 @@
       el.answers.appendChild(row);
     });
 
+    el.pointsValue.textContent = question.answers.reduce((sum, ans, ai) => sum + (isRevealed(ai) ? ans.points : 0), 0);
+
     el.prevBtn.disabled = state.questionIndex === 0;
     el.nextBtn.disabled = state.questionIndex === content.questions.length - 1;
 
@@ -114,6 +120,7 @@
   el.resetGameBtn.addEventListener('click', resetGame);
   el.strikeBtn.addEventListener('click', addStrike);
   el.stealBtn.addEventListener('click', toggleSteal);
+  el.winnerBtn.addEventListener('click', () => window.EventoChannel.send('audio:play', 'ganador'));
 
   render();
 })();

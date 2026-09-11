@@ -51,6 +51,7 @@
       card.addEventListener('click', () => {
         window.OperatorNavStore.setView(d.view);
         window.ViewSections.activate(d.view);
+        window.EventoChannel.send('audio:play', 'introDinamica');
       });
     } else {
       card.disabled = true;

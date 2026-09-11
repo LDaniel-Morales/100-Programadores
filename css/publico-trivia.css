@@ -19,6 +19,45 @@
   line-height: 1.3;
 }
 
+.trivia-pub__points {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.trivia-pub__points-box {
+  min-width: 76px;
+  height: 76px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel);
+  border: 3px solid var(--gold);
+  border-radius: 16px;
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--gold);
+  box-sizing: border-box;
+}
+
+.trivia-pub__points-label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--muted);
+}
+
+.trivia-pub__points-box.is-bump {
+  animation: pointsBump 0.4s ease-out;
+}
+
+@keyframes pointsBump {
+  0% { transform: scale(1.2); box-shadow: 0 0 30px rgba(207, 163, 78, 0.7); }
+  100% { transform: scale(1); box-shadow: none; }
+}
+
 .trivia-pub__status {
   display: flex;
   flex-direction: column;
