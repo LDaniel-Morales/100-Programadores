@@ -11,6 +11,7 @@
     revealBtn: document.getElementById('revealAnswerBtnCodigo'),
     prevBtn: document.getElementById('prevChallengeBtnCodigo'),
     nextBtn: document.getElementById('nextChallengeBtnCodigo'),
+    resetGameBtn: document.getElementById('resetGameBtnCodigo'),
   };
 
   window.PublicPreview.mount(document.getElementById('codigoPreview'));
@@ -107,10 +108,20 @@
     render();
   }
 
+  function resetGame() {
+    if (!confirm('¿Reiniciar el juego? Se ocultará la respuesta revelada y se volverá al primer reto.')) return;
+    clearInterval(intervalId);
+    intervalId = null;
+    state = { ...state, challengeIndex: 0, timeLeft: state.duration, running: false, revealed: false };
+    save();
+    render();
+  }
+
   el.startBtn.addEventListener('click', startTimer);
   el.revealBtn.addEventListener('click', revealAnswer);
   el.prevBtn.addEventListener('click', () => goToChallenge(state.challengeIndex - 1));
   el.nextBtn.addEventListener('click', () => goToChallenge(state.challengeIndex + 1));
+  el.resetGameBtn.addEventListener('click', resetGame);
 
   render();
   if (state.running) resumeTimer();

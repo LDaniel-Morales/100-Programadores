@@ -11,8 +11,10 @@
     challengeSamples: document.getElementById('challengeSamples'),
     declareWinner1: document.getElementById('declareWinner1'),
     declareWinner2: document.getElementById('declareWinner2'),
-    resetDuelBtn: document.getElementById('resetDuelBtn'),
+    resetGameBtn: document.getElementById('resetGameBtnDuelo'),
   };
+
+  window.PublicPreview.mount(document.getElementById('dueloPreview'));
 
   function render() {
     const challenge = content.challenges[state.challengeIndex];
@@ -36,7 +38,6 @@
     el.declareWinner2.textContent = `Ganador: ${state.player2}`;
     el.declareWinner1.classList.toggle('is-winner', state.winner === 1);
     el.declareWinner2.classList.toggle('is-winner', state.winner === 2);
-    el.resetDuelBtn.hidden = state.winner === null;
   }
 
   function save() {
@@ -81,8 +82,11 @@
     render();
   });
 
-  el.resetDuelBtn.addEventListener('click', () => {
+  el.resetGameBtn.addEventListener('click', () => {
+    if (!confirm('¿Reiniciar el juego? Se borrará el resultado actual y se volverá al primer reto.')) return;
+    state.challengeIndex = 0;
     state.winner = null;
+    state.language = content.languages[Math.floor(Math.random() * content.languages.length)];
     save();
     render();
   });

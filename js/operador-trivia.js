@@ -8,7 +8,7 @@
     answers: document.getElementById('triviaAnswers'),
     prevBtn: document.getElementById('prevQuestionBtn'),
     nextBtn: document.getElementById('nextQuestionBtn'),
-    resetBtn: document.getElementById('resetBoardBtn'),
+    resetGameBtn: document.getElementById('resetGameBtnTrivia'),
     strikeMarks: document.getElementById('strikeMarks'),
     strikeBtn: document.getElementById('strikeBtn'),
     stealBtn: document.getElementById('stealBtn'),
@@ -102,19 +102,16 @@
     render();
   }
 
-  function resetBoard() {
-    const revealMap = { ...state.revealMap };
-    Object.keys(revealMap).forEach((key) => {
-      if (key.startsWith(`${state.questionIndex}-`)) delete revealMap[key];
-    });
-    state = { ...state, revealMap, strikes: 0, stealing: false };
+  function resetGame() {
+    if (!confirm('¿Reiniciar el juego? Se borrarán todas las respuestas reveladas de todas las preguntas.')) return;
+    state = { questionIndex: 0, revealMap: {}, strikes: 0, stealing: false };
     save();
     render();
   }
 
   el.prevBtn.addEventListener('click', () => goToQuestion(state.questionIndex - 1));
   el.nextBtn.addEventListener('click', () => goToQuestion(state.questionIndex + 1));
-  el.resetBtn.addEventListener('click', resetBoard);
+  el.resetGameBtn.addEventListener('click', resetGame);
   el.strikeBtn.addEventListener('click', addStrike);
   el.stealBtn.addEventListener('click', toggleSteal);
 

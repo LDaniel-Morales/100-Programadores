@@ -195,22 +195,6 @@
   cursor: not-allowed;
 }
 
-.trivia-op__reset-btn {
-  font-family: 'Sora', sans-serif;
-  font-weight: 800;
-  font-size: 16px;
-  padding: 14px 28px;
-  background: var(--bronze);
-  color: var(--bg);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.trivia-op__reset-btn:hover {
-  background: var(--gold);
-}
-
 @media (max-width: 900px) {
   .trivia-op__grid { grid-template-columns: 1fr; }
 }
