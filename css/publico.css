@@ -3,6 +3,13 @@
   min-height: 100vh;
   background: var(--bg);
   display: flex;
+  flex-direction: column;
+}
+
+.duelo-pub__body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
 }
 
 .duelo-pub__versus {
@@ -12,6 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 40px;
   padding: 48px;
   box-sizing: border-box;
 }
@@ -20,11 +28,6 @@
   text-align: center;
   opacity: 1;
   transition: opacity 0.6s;
-  margin-bottom: 40px;
-}
-
-.duelo-pub__side:last-child {
-  margin-bottom: 0;
 }
 
 .duelo-pub__side.is-dim {
@@ -49,7 +52,6 @@
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 2px;
-  margin: 40px 0;
 }
 
 .duelo-pub__winner-badge {

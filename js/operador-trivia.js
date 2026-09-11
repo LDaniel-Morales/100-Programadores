@@ -8,7 +8,10 @@
     answers: document.getElementById('triviaAnswers'),
     prevBtn: document.getElementById('prevQuestionBtn'),
     nextBtn: document.getElementById('nextQuestionBtn'),
-    resetBtn: document.getElementById('resetBoardBtn'),
+    resetGameBtn: document.getElementById('resetGameBtnTrivia'),
+    strikeMarks: document.getElementById('strikeMarks'),
+    strikeBtn: document.getElementById('strikeBtn'),
+    stealBtn: document.getElementById('stealBtn'),
   };
 
   function currentQuestion() {
@@ -25,6 +28,20 @@
 
   function reveal(ai) {
     state = { ...state, revealMap: { ...state.revealMap, [`${state.questionIndex}-${ai}`]: true } };
+    save();
+    render();
+  }
+
+  function addStrike() {
+    if (state.strikes >= 3) return;
+    state = { ...state, strikes: state.strikes + 1 };
+    save();
+    window.EventoChannel.send('trivia:strike-flash', {});
+    render();
+  }
+
+  function toggleSteal() {
+    state = { ...state, stealing: !state.stealing };
     save();
     render();
   }
@@ -64,28 +81,39 @@
 
     el.prevBtn.disabled = state.questionIndex === 0;
     el.nextBtn.disabled = state.questionIndex === content.questions.length - 1;
+
+    el.strikeMarks.innerHTML = '';
+    [1, 2, 3].forEach((n) => {
+      const mark = document.createElement('span');
+      mark.className = 'trivia-op__strike-mark' + (state.strikes >= n ? ' is-active' : '');
+      mark.textContent = '✕';
+      el.strikeMarks.appendChild(mark);
+    });
+    el.strikeBtn.disabled = state.strikes >= 3;
+
+    el.stealBtn.classList.toggle('is-active', state.stealing);
+    el.stealBtn.textContent = state.stealing ? 'Robando puntos' : 'Robar puntos';
   }
 
   function goToQuestion(index) {
     const clamped = Math.max(0, Math.min(index, content.questions.length - 1));
-    state = { ...state, questionIndex: clamped };
+    state = { ...state, questionIndex: clamped, strikes: 0, stealing: false };
     save();
     render();
   }
 
-  function resetBoard() {
-    const revealMap = { ...state.revealMap };
-    Object.keys(revealMap).forEach((key) => {
-      if (key.startsWith(`${state.questionIndex}-`)) delete revealMap[key];
-    });
-    state = { ...state, revealMap };
+  function resetGame() {
+    if (!confirm('¿Reiniciar el juego? Se borrarán todas las respuestas reveladas de todas las preguntas.')) return;
+    state = { questionIndex: 0, revealMap: {}, strikes: 0, stealing: false };
     save();
     render();
   }
 
   el.prevBtn.addEventListener('click', () => goToQuestion(state.questionIndex - 1));
   el.nextBtn.addEventListener('click', () => goToQuestion(state.questionIndex + 1));
-  el.resetBtn.addEventListener('click', resetBoard);
+  el.resetGameBtn.addEventListener('click', resetGame);
+  el.strikeBtn.addEventListener('click', addStrike);
+  el.stealBtn.addEventListener('click', toggleSteal);
 
   render();
 })();

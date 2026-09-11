@@ -8,6 +8,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
+  margin-top: 24px;
   margin-bottom: 32px;
 }
 
@@ -79,6 +80,86 @@
   flex-shrink: 0;
 }
 
+.trivia-op__strikes-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.trivia-op__strikes-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.trivia-op__strike-marks {
+  display: flex;
+  gap: 8px;
+}
+
+.trivia-op__strike-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.trivia-op__strike-mark.is-active {
+  background: #c0392b;
+  border-color: #c0392b;
+  color: var(--white);
+}
+
+.trivia-op__strike-action-btn {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 10px 22px;
+  background: #c0392b;
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.trivia-op__strike-action-btn:hover {
+  background: #a5311f;
+}
+
+.trivia-op__strike-action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.trivia-op__steal-btn {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 12px 22px;
+  background: transparent;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.trivia-op__steal-btn.is-active {
+  background: var(--gold);
+  color: var(--bg);
+}
+
 .trivia-op__footer {
   display: flex;
   align-items: center;
@@ -112,22 +193,6 @@
 .trivia-op__nav-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-.trivia-op__reset-btn {
-  font-family: 'Sora', sans-serif;
-  font-weight: 800;
-  font-size: 16px;
-  padding: 14px 28px;
-  background: var(--bronze);
-  color: var(--bg);
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.trivia-op__reset-btn:hover {
-  background: var(--gold);
 }
 
 @media (max-width: 900px) {

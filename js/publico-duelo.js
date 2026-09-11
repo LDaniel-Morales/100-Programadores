@@ -18,6 +18,8 @@
     confettiLayer: document.getElementById('confettiLayer'),
   };
 
+  const header = window.PublicHeader.mount(document.getElementById('dueloPubHeader'));
+
   const CONFETTI_COLORS = ['#CFA34E', '#A86E2E', '#173B6C', '#FFFFFF'];
   let confettiTimeout = null;
 
@@ -48,6 +50,8 @@
 
   function render() {
     const challenge = content.challenges[state.challengeIndex];
+
+    header.setCounter(`RETO ${state.challengeIndex + 1} / ${content.challenges.length}`);
 
     el.pubPlayer1.textContent = state.player1;
     el.pubPlayer2.textContent = state.player2;

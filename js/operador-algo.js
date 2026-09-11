@@ -13,7 +13,10 @@
     answer: document.getElementById('algoAnswer'),
     prevBtn: document.getElementById('prevChallengeBtn'),
     nextBtn: document.getElementById('nextChallengeBtnAlgo'),
+    resetGameBtn: document.getElementById('resetGameBtnAlgo'),
   };
+
+  window.PublicPreview.mount(document.getElementById('algoPreview'));
 
   function currentChallenge() {
     return content.challenges[state.challengeIndex];
@@ -52,6 +55,7 @@
     });
 
     el.startBtn.textContent = state.running ? `Corriendo… ${state.timeLeft}s` : 'Iniciar timer';
+    el.revealBtn.textContent = state.revealed ? 'Ocultar nombre' : 'Revelar nombre';
     el.revealBtn.classList.toggle('is-revealed', state.revealed);
     el.answer.textContent = challenge.answer;
 
@@ -87,7 +91,16 @@
   function revealAnswer() {
     clearInterval(intervalId);
     intervalId = null;
-    state = { ...state, revealed: true, running: false };
+    state = { ...state, revealed: !state.revealed, running: false };
+    save();
+    render();
+  }
+
+  function resetGame() {
+    if (!confirm('¿Reiniciar el juego? Se ocultará el nombre revelado y se volverá al primer reto.')) return;
+    clearInterval(intervalId);
+    intervalId = null;
+    state = { ...state, challengeIndex: 0, timeLeft: state.duration, running: false, revealed: false };
     save();
     render();
   }
@@ -113,6 +126,7 @@
   el.revealBtn.addEventListener('click', revealAnswer);
   el.prevBtn.addEventListener('click', () => goToChallenge(state.challengeIndex - 1));
   el.nextBtn.addEventListener('click', () => goToChallenge(state.challengeIndex + 1));
+  el.resetGameBtn.addEventListener('click', resetGame);
 
   render();
   if (state.running) resumeTimer();

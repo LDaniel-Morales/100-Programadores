@@ -43,7 +43,10 @@
       <input class="menu-op__field-input" id="sessionNameInput" type="text" spellcheck="false">
     </div>
     <div class="menu-op__field">
-      <label class="mono menu-op__field-label" for="nextDynamicInput">Próxima dinámica (anuncio en Público)</label>
+      <div class="menu-op__field-head">
+        <label class="mono menu-op__field-label" for="nextDynamicInput">Próxima dinámica (anuncio en Público)</label>
+        <div class="header-controls__switch-group" id="menuLiveSwitch"></div>
+      </div>
       <input class="menu-op__field-input" id="nextDynamicInput" type="text" spellcheck="false">
     </div>
   </div>
@@ -61,7 +64,10 @@
       <div class="mono dyn-header__eyebrow">DUELO EN CURSO</div>
       <div class="dyn-header__title">Control de resultado</div>
     </div>
-    <div class="header-controls" id="headerControls-duelo"></div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-duelo"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnDuelo">Reiniciar Juego</button>
+    </div>
   </div>
 
   <div class="duelo-op__players">
@@ -83,13 +89,16 @@
         <button class="btn-ghost" id="rerollLanguageBtn">Sortear lenguaje</button>
       </div>
     </div>
-    <div class="duelo-op__challenge-card">
-      <div class="duelo-op__challenge-head">
-        <div class="duelo-op__challenge-name" id="challengeName"></div>
-        <div class="mono dyn-lang-badge" id="languageBadge"></div>
+    <div class="duelo-op__reto-body">
+      <div class="duelo-op__challenge-card">
+        <div class="duelo-op__challenge-head">
+          <div class="duelo-op__challenge-name" id="challengeName"></div>
+          <div class="mono dyn-lang-badge" id="languageBadge"></div>
+        </div>
+        <div class="duelo-op__challenge-statement" id="challengeStatement"></div>
+        <div id="challengeSamples"></div>
       </div>
-      <div class="duelo-op__challenge-statement" id="challengeStatement"></div>
-      <div id="challengeSamples"></div>
+      <div id="dueloPreview"></div>
     </div>
   </div>
 
@@ -99,7 +108,6 @@
       <button class="duelo-op__winner-btn duelo-op__winner-btn--1" id="declareWinner1"></button>
       <button class="duelo-op__winner-btn duelo-op__winner-btn--2" id="declareWinner2"></button>
     </div>
-    <button class="btn-ghost duelo-op__reset" id="resetDuelBtn" hidden>Reiniciar duelo</button>
   </div>
 </section>
 
@@ -110,7 +118,10 @@
       <div class="mono dyn-header__eyebrow" id="algoChallengeCounter"></div>
       <div class="dyn-header__title">¿Qué algoritmo es este?</div>
     </div>
-    <div class="header-controls" id="headerControls-algoritmo"></div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-algoritmo"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnAlgo">Reiniciar Juego</button>
+    </div>
   </div>
 
   <div class="tc-body">
@@ -123,7 +134,7 @@
         </div>
       </div>
 
-      <div class="mono dyn-label algo-op__lang" id="algoLang"></div>
+      <div class="mono dyn-lang-badge algo-op__lang" id="algoLang"></div>
       <div class="tc-code" id="algoCode"></div>
 
       <div class="tc-duration-row">
@@ -137,9 +148,12 @@
       </div>
     </div>
 
-    <div class="algo-op__answer-panel">
-      <div class="mono dyn-label">SOLO OPERADOR · RESPUESTA</div>
-      <div class="algo-op__answer-value" id="algoAnswer"></div>
+    <div class="algo-op__side">
+      <div class="algo-op__answer-panel">
+        <div class="mono dyn-label">SOLO OPERADOR · RESPUESTA</div>
+        <div class="algo-op__answer-value" id="algoAnswer"></div>
+      </div>
+      <div id="algoPreview"></div>
     </div>
   </div>
 </section>
@@ -151,7 +165,10 @@
       <div class="mono dyn-header__eyebrow" id="codigoChallengeCounter"></div>
       <div class="dyn-header__title">¿Qué imprime este código?</div>
     </div>
-    <div class="header-controls" id="headerControls-codigo"></div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-codigo"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnCodigo">Reiniciar Juego</button>
+    </div>
   </div>
 
   <div class="tc-body">
@@ -188,18 +205,29 @@
       <div class="mono dyn-header__eyebrow" id="triviaQuestionCounter"></div>
       <div class="dyn-header__title trivia-op__title" id="triviaQuestionTitle"></div>
     </div>
-    <div class="header-controls" id="headerControls-trivia"></div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-trivia"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnTrivia">Reiniciar Juego</button>
+    </div>
   </div>
 
   <div class="dyn-section">
     <div class="trivia-op__grid" id="triviaAnswers"></div>
+
+    <div class="trivia-op__strikes-row">
+      <div class="trivia-op__strikes-group">
+        <div class="mono dyn-label">STRIKES</div>
+        <div class="trivia-op__strike-marks" id="strikeMarks"></div>
+        <button class="trivia-op__strike-action-btn" id="strikeBtn">STRIKE</button>
+      </div>
+      <button class="trivia-op__steal-btn" id="stealBtn">Robar puntos</button>
+    </div>
 
     <div class="trivia-op__footer">
       <div class="trivia-op__nav">
         <button class="trivia-op__nav-btn" id="prevQuestionBtn">← Pregunta anterior</button>
         <button class="trivia-op__nav-btn" id="nextQuestionBtn">Pregunta siguiente →</button>
       </div>
-      <button class="trivia-op__reset-btn" id="resetBoardBtn">Reiniciar tablero</button>
     </div>
   </div>
 </section>
@@ -219,6 +247,7 @@
 <script src="js/public-view-store.js"></script>
 <script src="js/view-sections.js"></script>
 <script src="js/next-dynamic-field.js"></script>
+<script src="js/live-switch.js"></script>
 <script src="js/header-controls.js"></script>
 <script src="js/public-preview.js"></script>
 <script src="js/menu-operador.js"></script>
@@ -230,6 +259,7 @@
   function goToMenu() {
     window.OperatorNavStore.setView('menu');
     window.ViewSections.activate('menu');
+    window.PublicViewStore.setView('menu');
   }
   document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
   document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);

@@ -9,11 +9,13 @@
     answer: document.getElementById('algoPubAnswer'),
   };
 
+  const header = window.PublicHeader.mount(document.getElementById('algoPubHeader'));
   const CIRCUMFERENCE = 402;
 
   function render(state) {
     const challenge = content.challenges[state.challengeIndex];
 
+    header.setCounter(`RETO ${state.challengeIndex + 1} / ${content.challenges.length}`);
     el.lang.textContent = challenge.lang;
 
     el.code.innerHTML = '';
