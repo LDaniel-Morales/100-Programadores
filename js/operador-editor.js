@@ -384,6 +384,78 @@
     panel.appendChild(addChallengeBtn);
   }
 
+  // Puente hacia data/*.js: el proyecto no tiene backend, así que un
+  // navegador no puede escribir esos archivos por sí solo. Esto genera cada
+  // archivo con el contenido actual (lo editado en este navegador) y lo
+  // ofrece como descarga; el operador lo mueve a mano a data/ para que el
+  // dataset del repo quede igual a lo editado.
+  const DATASET_FILES = [
+    {
+      fileName: 'trivia-defaults.js',
+      varName: 'TRIVIA_DEFAULTS',
+      store: window.TriviaStore,
+      header: '// Preguntas de la dinámica "Trivia Popular" (estilo Family Feud): una\n'
+        + '// pregunta con hasta 8 respuestas ocultas, numeradas por popularidad.',
+    },
+    {
+      fileName: 'codigo-defaults.js',
+      varName: 'CODIGO_DEFAULTS',
+      store: window.CodigoStore,
+      header: '// Retos de la dinámica "¿Qué dice el código?": un fragmento de código\n'
+        + '// coloreado por tokens y lo que imprime/devuelve.',
+    },
+    {
+      fileName: 'algo-defaults.js',
+      varName: 'ALGO_DEFAULTS',
+      store: window.AlgoStore,
+      header: '// Retos de la dinámica "Adivina el Algoritmo": fragmento de código coloreado\n'
+        + '// por tokens + el nombre del algoritmo que solo ve el Operador.',
+    },
+    {
+      fileName: 'duelo-defaults.js',
+      varName: 'DUELO_DEFAULTS',
+      store: window.DueloStore,
+      header: '// Contenido inicial de la dinámica "Duelo de Programación".\n'
+        + '// Se copia a localStorage en el primer uso y desde ahí se puede editar/ampliar\n'
+        + '// sin perder los datos al recargar la página.',
+    },
+  ];
+
+  function serializeDefaultsFile({ varName, header }, content) {
+    return `${header}\nwindow.${varName} = ${JSON.stringify(content, null, 2)};\n`;
+  }
+
+  function triggerDownload(fileName, text) {
+    const blob = new Blob([text], { type: 'application/javascript' });
+    const url = URL.createObjectURL(blob);
+    const link = el('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadDataset() {
+    DATASET_FILES.forEach((entry) => {
+      const content = entry.store.getContent();
+      triggerDownload(entry.fileName, serializeDefaultsFile(entry, content));
+    });
+  }
+
+  function restoreOriginalDataset() {
+    if (!confirm('¿Restaurar el dataset original? Se perderán todas las preguntas y retos editados en este navegador (trivia, código, algoritmo y duelo).')) return;
+    if (!confirm('Esto no se puede deshacer. ¿Confirmas que quieres continuar?')) return;
+    ['100prog:trivia:content', '100prog:codigo:content', '100prog:algo:content', '100prog:duelo:content'].forEach((key) => {
+      localStorage.removeItem(key);
+    });
+    window.location.reload();
+  }
+
+  document.getElementById('downloadDatasetBtn').addEventListener('click', downloadDataset);
+  document.getElementById('restoreDatasetBtn').addEventListener('click', restoreOriginalDataset);
+
   renderTrivia();
   renderCodigo();
   renderAlgoritmo();

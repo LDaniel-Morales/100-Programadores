@@ -215,13 +215,21 @@
   <div class="dyn-section">
     <div class="trivia-op__grid" id="triviaAnswers"></div>
 
+    <div class="trivia-op__points-row">
+      <div class="mono dyn-label">PUNTOS EN JUEGO</div>
+      <div class="trivia-op__points-value" id="triviaPointsValue">0</div>
+    </div>
+
     <div class="trivia-op__strikes-row">
       <div class="trivia-op__strikes-group">
         <div class="mono dyn-label">STRIKES</div>
         <div class="trivia-op__strike-marks" id="strikeMarks"></div>
         <button class="trivia-op__strike-action-btn" id="strikeBtn">STRIKE</button>
       </div>
-      <button class="trivia-op__steal-btn" id="stealBtn">Robar puntos</button>
+      <div class="trivia-op__actions">
+        <button class="trivia-op__winner-btn" id="winnerBtn">🏆 Winner</button>
+        <button class="trivia-op__steal-btn" id="stealBtn">Robar puntos</button>
+      </div>
     </div>
 
     <div class="trivia-op__footer">
@@ -240,7 +248,13 @@
       <div class="mono dyn-header__eyebrow">EDITOR DE CONTENIDO</div>
       <div class="dyn-header__title">Preguntas y dinámicas</div>
     </div>
+    <div class="dyn-header__right">
+      <button class="editor-op__download-btn" id="downloadDatasetBtn">⬇ Descargar dataset actualizado</button>
+      <button class="dyn-reset-btn" id="restoreDatasetBtn">↺ Restaurar dataset original</button>
+    </div>
   </div>
+
+  <div class="editor-op__intro editor-op__intro--header">Los cambios se guardan al instante en este navegador. Para que queden en el proyecto, descarga el dataset actualizado y reemplaza los archivos dentro de <span class="mono">data/</span>.</div>
 
   <div class="editor-op__tabs" id="editorTabs">
     <button class="editor-op__tab is-active" data-tab="trivia">Trivia Popular</button>
