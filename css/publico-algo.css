@@ -1,0 +1,20 @@
+.algo-pub__lang {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 10px 28px;
+  border-radius: 10px;
+  width: fit-content;
+  margin: 0 auto 28px;
+}
+
+.algo-pub__answer {
+  margin-top: 40px;
+  font-size: 72px;
+  font-weight: 800;
+  color: var(--gold);
+  text-align: center;
+  animation: scaleGlow 0.7s ease-out forwards;
+}

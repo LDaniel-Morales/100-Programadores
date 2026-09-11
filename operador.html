@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>100 Programadores Dijeron — Operador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/menu-operador.css">
+<link rel="stylesheet" href="css/header-controls.css">
+<link rel="stylesheet" href="css/dynamic-shared.css">
+<link rel="stylesheet" href="css/timed-challenge.css">
+<link rel="stylesheet" href="css/public-preview.css">
+<link rel="stylesheet" href="css/operador.css">
+<link rel="stylesheet" href="css/operador-algo.css">
+<link rel="stylesheet" href="css/operador-trivia.css">
+<link rel="stylesheet" href="css/operador-editor.css">
+</head>
+<body>
+
+<section class="view menu-op" id="view-menu">
+  <div class="menu-op__topbar">
+    <div class="menu-op__brand">
+      <div class="mono menu-op__logo">&lt;100/&gt;</div>
+      <div>
+        <div class="menu-op__title">Panel de control</div>
+        <div class="mono menu-op__session">sesión: <span id="sessionName"></span></div>
+      </div>
+    </div>
+    <div class="menu-op__status">
+      <div class="menu-op__projector">
+        <span class="menu-op__dot"></span>
+        proyector conectado
+      </div>
+      <button class="btn-outline" id="contentEditorBtn">Editor de contenido</button>
+      <button class="btn-primary" id="openPublicoBtn">Abrir vista de Público ↗</button>
+    </div>
+  </div>
+
+  <div class="menu-op__editable">
+    <div class="menu-op__field">
+      <label class="mono menu-op__field-label" for="sessionNameInput">Nombre de la sesión</label>
+      <input class="menu-op__field-input" id="sessionNameInput" type="text" spellcheck="false">
+    </div>
+    <div class="menu-op__field">
+      <div class="menu-op__field-head">
+        <label class="mono menu-op__field-label" for="nextDynamicInput">Próxima dinámica (anuncio en Público)</label>
+        <div class="header-controls__switch-group" id="menuLiveSwitch"></div>
+      </div>
+      <input class="menu-op__field-input" id="nextDynamicInput" type="text" spellcheck="false">
+    </div>
+  </div>
+
+  <div class="menu-op__dynamics">
+    <div class="mono menu-op__dynamics-label">// SELECCIONAR DINÁMICA</div>
+    <div class="menu-op__grid" id="menuDynamics"></div>
+  </div>
+</section>
+
+<section class="view dyn-page" id="view-duelo" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="backToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow">DUELO EN CURSO</div>
+      <div class="dyn-header__title">Control de resultado</div>
+    </div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-duelo"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnDuelo">Reiniciar Juego</button>
+    </div>
+  </div>
+
+  <div class="duelo-op__players">
+    <div class="duelo-op__player-card">
+      <div class="mono dyn-label">JUGADOR 1</div>
+      <div class="duelo-op__player-name" id="player1Name" contenteditable="true" spellcheck="false"></div>
+    </div>
+    <div class="duelo-op__player-card">
+      <div class="mono dyn-label">JUGADOR 2</div>
+      <div class="duelo-op__player-name" id="player2Name" contenteditable="true" spellcheck="false"></div>
+    </div>
+  </div>
+
+  <div class="dyn-section">
+    <div class="dyn-section-head">
+      <div class="mono dyn-label">// RETO</div>
+      <div class="dyn-actions">
+        <button class="btn-ghost" id="nextChallengeBtn">Cambiar reto</button>
+        <button class="btn-ghost" id="rerollLanguageBtn">Sortear lenguaje</button>
+      </div>
+    </div>
+    <div class="duelo-op__reto-body">
+      <div class="duelo-op__challenge-card">
+        <div class="duelo-op__challenge-head">
+          <div class="duelo-op__challenge-name" id="challengeName"></div>
+          <div class="mono dyn-lang-badge" id="languageBadge"></div>
+        </div>
+        <div class="duelo-op__challenge-statement" id="challengeStatement"></div>
+        <div id="challengeSamples"></div>
+      </div>
+      <div id="dueloPreview"></div>
+    </div>
+  </div>
+
+  <div class="dyn-section">
+    <div class="mono dyn-label duelo-op__winner-label">// DECLARAR GANADOR</div>
+    <div class="duelo-op__winner-grid">
+      <button class="duelo-op__winner-btn duelo-op__winner-btn--1" id="declareWinner1"></button>
+      <button class="duelo-op__winner-btn duelo-op__winner-btn--2" id="declareWinner2"></button>
+    </div>
+  </div>
+</section>
+
+<section class="view dyn-page" id="view-algoritmo" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="algoBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow" id="algoChallengeCounter"></div>
+      <div class="dyn-header__title">¿Qué algoritmo es este?</div>
+    </div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-algoritmo"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnAlgo">Reiniciar Juego</button>
+    </div>
+  </div>
+
+  <div class="tc-body">
+    <div>
+      <div class="dyn-section-head tc-nav-head">
+        <div class="mono dyn-label">// RETO</div>
+        <div class="dyn-actions">
+          <button class="btn-ghost" id="prevChallengeBtn">← Reto anterior</button>
+          <button class="btn-ghost" id="nextChallengeBtnAlgo">Reto siguiente →</button>
+        </div>
+      </div>
+
+      <div class="mono dyn-lang-badge algo-op__lang" id="algoLang"></div>
+      <div class="tc-code" id="algoCode"></div>
+
+      <div class="tc-duration-row">
+        <div class="mono dyn-label">DURACIÓN</div>
+        <div class="tc-duration-options" id="algoDurationOptions"></div>
+      </div>
+
+      <div class="tc-actions-row">
+        <button class="btn-primary tc-start" id="startTimerBtn"></button>
+        <button class="tc-reveal" id="revealAnswerBtn">Revelar nombre</button>
+      </div>
+    </div>
+
+    <div class="algo-op__side">
+      <div class="algo-op__answer-panel">
+        <div class="mono dyn-label">SOLO OPERADOR · RESPUESTA</div>
+        <div class="algo-op__answer-value" id="algoAnswer"></div>
+      </div>
+      <div id="algoPreview"></div>
+    </div>
+  </div>
+</section>
+
+<section class="view dyn-page" id="view-codigo" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="codigoBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow" id="codigoChallengeCounter"></div>
+      <div class="dyn-header__title">¿Qué imprime este código?</div>
+    </div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-codigo"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnCodigo">Reiniciar Juego</button>
+    </div>
+  </div>
+
+  <div class="tc-body">
+    <div>
+      <div class="dyn-section-head tc-nav-head">
+        <div class="mono dyn-label">// RETO</div>
+        <div class="dyn-actions">
+          <button class="btn-ghost" id="prevChallengeBtnCodigo">← Reto anterior</button>
+          <button class="btn-ghost" id="nextChallengeBtnCodigo">Reto siguiente →</button>
+        </div>
+      </div>
+
+      <div class="tc-code" id="codigoCode"></div>
+
+      <div class="tc-duration-row">
+        <div class="mono dyn-label">DURACIÓN</div>
+        <div class="tc-duration-options" id="codigoDurationOptions"></div>
+      </div>
+
+      <div class="tc-actions-row">
+        <button class="btn-primary tc-start" id="startTimerBtnCodigo"></button>
+        <button class="tc-reveal" id="revealAnswerBtnCodigo">Revelar respuesta</button>
+      </div>
+    </div>
+
+    <div id="codigoPreview"></div>
+  </div>
+</section>
+
+<section class="view dyn-page" id="view-trivia" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="triviaBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow" id="triviaQuestionCounter"></div>
+      <div class="dyn-header__title trivia-op__title" id="triviaQuestionTitle"></div>
+    </div>
+    <div class="dyn-header__right">
+      <div class="header-controls" id="headerControls-trivia"></div>
+      <button class="dyn-reset-btn" id="resetGameBtnTrivia">Reiniciar Juego</button>
+    </div>
+  </div>
+
+  <div class="dyn-section">
+    <div class="trivia-op__grid" id="triviaAnswers"></div>
+
+    <div class="trivia-op__points-row">
+      <div class="mono dyn-label">PUNTOS EN JUEGO</div>
+      <div class="trivia-op__points-value" id="triviaPointsValue">0</div>
+    </div>
+
+    <div class="trivia-op__strikes-row">
+      <div class="trivia-op__strikes-group">
+        <div class="mono dyn-label">STRIKES</div>
+        <div class="trivia-op__strike-marks" id="strikeMarks"></div>
+        <button class="trivia-op__strike-action-btn" id="strikeBtn">STRIKE</button>
+      </div>
+      <div class="trivia-op__actions">
+        <button class="trivia-op__winner-btn" id="winnerBtn">🏆 Winner</button>
+        <button class="trivia-op__steal-btn" id="stealBtn">Robar puntos</button>
+      </div>
+    </div>
+
+    <div class="trivia-op__footer">
+      <div class="trivia-op__nav">
+        <button class="trivia-op__nav-btn" id="prevQuestionBtn">← Pregunta anterior</button>
+        <button class="trivia-op__nav-btn" id="nextQuestionBtn">Pregunta siguiente →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="view dyn-page" id="view-editor" hidden>
+  <div class="dyn-header">
+    <div>
+      <button class="btn-ghost dyn-header__back" id="editorBackToMenuBtn">← Menú</button>
+      <div class="mono dyn-header__eyebrow">EDITOR DE CONTENIDO</div>
+      <div class="dyn-header__title">Preguntas y dinámicas</div>
+    </div>
+    <div class="dyn-header__right">
+      <button class="editor-op__download-btn" id="downloadDatasetBtn">⬇ Descargar dataset actualizado</button>
+      <button class="dyn-reset-btn" id="restoreDatasetBtn">↺ Restaurar dataset original</button>
+    </div>
+  </div>
+
+  <div class="editor-op__intro editor-op__intro--header">Los cambios se guardan al instante en este navegador. Para que queden en el proyecto, descarga el dataset actualizado y reemplaza los archivos dentro de <span class="mono">data/</span>.</div>
+
+  <div class="editor-op__tabs" id="editorTabs">
+    <button class="editor-op__tab is-active" data-tab="trivia">Trivia Popular</button>
+    <button class="editor-op__tab" data-tab="codigo">¿Qué dice el código?</button>
+    <button class="editor-op__tab" data-tab="algoritmo">Adivina el Algoritmo</button>
+    <button class="editor-op__tab" data-tab="duelo">Duelo de Programación</button>
+  </div>
+
+  <div class="editor-op__panel" id="editorPanel-trivia"></div>
+  <div class="editor-op__panel" id="editorPanel-codigo" hidden></div>
+  <div class="editor-op__panel" id="editorPanel-algoritmo" hidden></div>
+  <div class="editor-op__panel" id="editorPanel-duelo" hidden></div>
+</section>
+
+<script src="js/broadcast.js"></script>
+<script src="data/duelo-defaults.js"></script>
+<script src="data/menu-defaults.js"></script>
+<script src="data/algo-defaults.js"></script>
+<script src="data/codigo-defaults.js"></script>
+<script src="data/trivia-defaults.js"></script>
+<script src="js/duelo-store.js"></script>
+<script src="js/algo-store.js"></script>
+<script src="js/codigo-store.js"></script>
+<script src="js/trivia-store.js"></script>
+<script src="js/menu-store.js"></script>
+<script src="js/operator-nav-store.js"></script>
+<script src="js/public-view-store.js"></script>
+<script src="js/view-sections.js"></script>
+<script src="js/next-dynamic-field.js"></script>
+<script src="js/live-switch.js"></script>
+<script src="js/header-controls.js"></script>
+<script src="js/public-preview.js"></script>
+<script src="js/menu-operador.js"></script>
+<script src="js/operador-duelo.js"></script>
+<script src="js/operador-algo.js"></script>
+<script src="js/operador-codigo.js"></script>
+<script src="js/operador-trivia.js"></script>
+<script src="js/operador-editor.js"></script>
+<script>
+  function goToMenu() {
+    window.OperatorNavStore.setView('menu');
+    window.ViewSections.activate('menu');
+    window.PublicViewStore.setView('menu');
+  }
+  document.getElementById('backToMenuBtn').addEventListener('click', goToMenu);
+  document.getElementById('algoBackToMenuBtn').addEventListener('click', goToMenu);
+  document.getElementById('codigoBackToMenuBtn').addEventListener('click', goToMenu);
+  document.getElementById('triviaBackToMenuBtn').addEventListener('click', goToMenu);
+
+  document.getElementById('contentEditorBtn').addEventListener('click', () => {
+    window.OperatorNavStore.setView('editor');
+    window.ViewSections.activate('editor');
+  });
+
+  document.getElementById('editorBackToMenuBtn').addEventListener('click', () => {
+    // Recarga para que Trivia/Duelo/Algoritmo/Código tomen el contenido
+    // editado: cada uno lee su store una sola vez al cargar la página.
+    window.OperatorNavStore.setView('menu');
+    window.location.reload();
+  });
+
+  window.HeaderControls.mount(document.getElementById('headerControls-duelo'), 'duelo');
+  window.HeaderControls.mount(document.getElementById('headerControls-algoritmo'), 'algoritmo');
+  window.HeaderControls.mount(document.getElementById('headerControls-codigo'), 'codigo');
+  window.HeaderControls.mount(document.getElementById('headerControls-trivia'), 'trivia');
+
+  window.ViewSections.activate(window.OperatorNavStore.getView());
+</script>
+</body>
+</html>

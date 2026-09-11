@@ -1,0 +1,28 @@
+.public-preview__label {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.public-preview__frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-gold);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg);
+}
+
+.public-preview__iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400%;
+  height: 400%;
+  border: 0;
+  transform: scale(0.25);
+  transform-origin: top left;
+  pointer-events: none;
+}

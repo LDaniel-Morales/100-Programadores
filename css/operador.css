@@ -1,0 +1,114 @@
+.duelo-op__players {
+  padding: 32px 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.duelo-op__player-card {
+  background: var(--panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.duelo-op__player-name {
+  font-size: 22px;
+  font-weight: 800;
+  outline: none;
+  margin-top: 2px;
+}
+
+.duelo-op__player-name:focus {
+  color: var(--gold);
+}
+
+.duelo-op__reto-body {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.duelo-op__challenge-card {
+  background: var(--panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 24px 28px;
+}
+
+@media (max-width: 980px) {
+  .duelo-op__reto-body { grid-template-columns: 1fr; }
+}
+
+.duelo-op__challenge-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.duelo-op__challenge-name {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.duelo-op__challenge-statement {
+  font-size: 15px;
+  color: var(--white);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.duelo-op__sample {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  gap: 24px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.duelo-op__sample span span {
+  color: var(--white);
+}
+
+.duelo-op__winner-label {
+  margin-bottom: 16px;
+}
+
+.duelo-op__winner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.duelo-op__winner-btn {
+  font-family: 'Sora', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  padding: 26px;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.duelo-op__winner-btn--1 {
+  border: 2px solid var(--blue);
+}
+
+.duelo-op__winner-btn--2 {
+  border: 2px solid var(--bronze);
+}
+
+.duelo-op__winner-btn--1.is-winner {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.duelo-op__winner-btn--2.is-winner {
+  background: var(--bronze);
+  color: var(--white);
+}
+
